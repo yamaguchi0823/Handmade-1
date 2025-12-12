@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>商品詳細</title>
+<link rel="stylesheet" th:href="@{/css/reset.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>商品詳細</h1>
+
+<!-- 商品情報 -->
+<table>
+	<tr>
+		<th>商品名</th>
+		<td th:text="${item.name}"></td>
+	</tr>
+	<tr>
+		<th>商品カテゴリ</th>
+		<td th:text="${item.category}"></td>
+	</tr>
+	<tr>
+		<th>説明</th>
+		<td th:text="${item.description}"></td>
+	</tr>
+	<tr>
+		<th>登録日</th>
+		<td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+	</tr>
+</table>
+
+<br />
+<!-- 編集・削除 -->
+<a th:href="@{/items/{id}/edit(id=${item.id})}" class="button">編集</a>
+
+<form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline;">
+	<button type="submit" class="button danger"
+		onclick="return confirm('商品を削除しますか？');">
+		削除
+	</button>
+</form>
+<br /><br />
+
+<h2>バリエーション一覧</h2>
+
+<a th:href="@{/items/{id}/variants/new(id=${item.id})}" class="button">
+    バリエーションを追加
+</a>
+
+<table>
+    <thead>
+        <tr>
+			<th>画像</th>
+            <th>色</th>
+            <th>サイズ</th>
+			<th>分類</th>
+			<th>入り数</th>
+            <th>在庫</th>
+            <th>原価</th>
+            <th>販売価格</th>
+            <th>SKU</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:if="${#lists.isEmpty(variants)}">
+            <td colspan="8" style="text-align:center;">登録されているバリエーションがありません</td>
+        </tr>
+
+        <tr th:each="v : ${variants}">
+			
+			<td>
+			<div th:if="${v.imageFilename != null}">
+			    <img th:src="@{'/uploads/' + ${v.imageFilename}}" width="120">
+			</div>
+			<div th:if="${v.imageFilename == null}">
+				画像なし
+			</div>
+			</td>
+			
+            <td th:text="${v.color}"></td>
+            <td th:text="${v.size}"></td>
+            <td th:text="${v.category}"></td>
+            <td th:text="${v.quantityPerSet}"></td>
+            <td th:text="${v.stock}"></td>
+            <td th:text="${v.costPrice}"></td>
+            <td th:text="${v.price}"></td>
+            <td th:text="${v.skuCode}"></td>
+            <td>
+                <a th:href="@{/items/{itemId}/variants/{variantId}/edit(itemId=${item.id},variantId=${v.id})}"
+                   class="button">編集</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/items" class="button">商品一覧に戻る</a>
+
+
+</body>
+</html>

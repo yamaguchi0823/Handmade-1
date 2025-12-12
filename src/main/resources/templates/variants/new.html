@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>バリエーション登録</title>
+	<link rel="stylesheet" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<h1>バリエーション登録</h1>
+
+<!-- 親商品の情報 -->
+<table>
+    <tr>
+        <th>商品名</th>
+        <td th:text="${item.name}"></td>
+    </tr>
+    <tr>
+        <th>商品カテゴリー</th>
+        <td th:text="${item.category}"></td>
+    </tr>
+</table>
+
+<br>
+
+<form th:action="@{/items/{itemId}/variants(itemId=${item.id})}" 
+	method="post" enctype="multipart/form-data">
+	
+	<label>画像アップロード</label>
+	<input type="file" name="imageFile" />
+	<br /><br />
+
+    <label>色：</label>
+    <input type="text" name="color" required>
+    <br><br>
+
+    <label>サイズ：</label>
+    <input type="text" name="size" required>
+    <br><br>
+	
+	<label>分類</label>
+	<select name="category" required>
+		<option value="">選択してください</option>
+		<option th:each="c : ${categories}" 
+				th:value="${c}"
+				th:text="${c}"
+				>
+		</option>
+	</select>
+	<br><br>
+	
+	<label>入り数</label>
+	<input type="number" name="quantityPerSet" min="1" required>
+	<br><br>
+	
+    <label>在庫数：</label>
+    <input type="number" name="stock" value="0" min="0" required>
+    <br><br>
+
+    <label>原価：</label>
+    <input type="number" name="costPrice" value="0" min="0" required>
+    <br><br>
+
+    <label>販売価格：</label>
+    <input type="number" name="price" value="0" min="0" required>
+    <br><br>
+
+    <label>SKUコード：</label>
+    <input type="text" name="skuCode">
+    <br><br>
+
+    <button type="submit" class="button">登録する</button>
+    <a th:href="@{/items/{id}(id=${item.id})}" class="button">戻る</a>
+
+</form>
+
+</body>
+</html>

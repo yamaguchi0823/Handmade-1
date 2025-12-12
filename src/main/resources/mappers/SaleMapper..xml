@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.SaleMapper">
+
+	<!-- 販売一覧 -->
+	<select id="findAll" resultType="com.example.app.dto.SaleView">
+		SELECT
+			s.id,
+            s.sale_date AS saleDate,
+            s.quantity,
+            s.sale_price AS salePrice,
+            s.channel,
+            s.memo,
+            s.variant_id AS variantId,
+            s.created_at AS createdAt,
+            
+            v.color,
+            v.size,
+            
+            i.name AS itemName
+            	
+		FROM sales s
+		JOIN item_variants v ON s.variant_id = v.id
+		JOIN items i ON v.item_id = i.id 
+		ORDER BY sale_date DESC, s.id DESC	
+	</select>
+	
+	<!-- 販売取得 -->
+	<select id="findById"
+		parameterType="long"
+		resultType="Sale">
+		SELECT
+			id,
+            sale_date AS saleDate,
+            variant_id AS variantId,
+            quantity,
+            sale_price AS salePrice,
+            channel,
+            memo,
+            created_at AS createdAt
+		FROM sales 
+		WHERE id = #{id}
+	</select>
+
+	<!-- バリエーション別の履歴 -->
+	<select id="findByVariantId" 
+		parameterType="long" 
+		resultType="Sale">
+		SELECT
+			id,
+            sale_date AS saleDate,
+            variant_id AS variantId,
+            quantity,
+            sale_price AS salePrice,
+            channel,
+            memo,
+            created_at AS createdAt
+		FROM sales 
+		WHERE variant_id = #{variantId}
+		ORDER BY sale_date DESC
+	</select>
+	
+	<!-- 販売登録 -->
+	<insert id="insert" 
+		parameterType="Sale">
+		INSERT INTO sales
+			(sale_date,variant_id, quantity, sale_price, channel, memo, created_at)
+		VALUES
+			(#{saleDate},#{variantId},#{quantity},#{salePrice},#{channel},#{memo},NOW())
+	</insert>
+
+</mapper>
