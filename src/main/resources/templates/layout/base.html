@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:replace="${title}">アプリ名</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <!-- 共通ヘッダー -->
+    <header th:replace="layout/header :: header"></header>
+
+    <!-- 個別ページの内容 -->
+    <main class="container">
+        <div th:replace="${content}"></div>
+    </main>
+
+    <!-- 共通フッター -->
+    <footer th:replace="layout/footer :: footer"></footer>
+
+</body>
+</html>
