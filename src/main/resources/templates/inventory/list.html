@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>在庫一覧</title>
-<link rel="stylesheet" th:href="@{/css/reset.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-	
-	<h1>在庫一覧（SCR-501）</h1>
-	
-	<form method="get" action="/inventory">
+
+<!-- タイトル -->
+<th:block th:fragment="title">在庫一覧</th:block>
+
+<!-- コンテンツ -->
+<th:block th:fragment="content">
+
+    <h1>在庫一覧（SCR-501）</h1>
+
+    <!-- 検索フォーム -->
+	<form method="get" action="/inventory" class="search-form">
 		
 		<input type="text" name="keyword" placeholder="商品名" 
 		th:value="${keyword}" />
@@ -91,12 +91,12 @@
 	                    </tr>
 	                </tbody>
 	            </table>
-
 	        </div>
-
 	    </div>
-	
-	
-	
-</body>
+		
+</th:block>
+
+<!-- base.html を適用 -->
+<th:block th:replace="layout/base :: base (~{::title}, ~{::content})"></th:block>
+
 </html>
