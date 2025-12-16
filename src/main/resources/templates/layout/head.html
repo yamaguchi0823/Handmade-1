@@ -1,0 +1,13 @@
+<head th:fragment="commonHead(title,description)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title th:text="${title}">Handmade</title>
+  <meta name="description" th:content="${description}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+
+  <!-- 必要なら後で追加 -->
+  <!-- <link rel="icon" th:href="@{/favicon.ico}"> -->
+</head>

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>商品一覧</title>
-	<link rel="stylesheet" th:href="@{/css/reset.css}" />
-	<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+<head th:replace="layout/head :: commonHead(
+    '商品一覧',
+    '登録されているハンドメイド作品の一覧を表示します'
+    )"></head>
 <body>
-
+<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
 <h1>商品一覧</h1>
 
 <!-- 新規登録ボタン -->
@@ -59,5 +58,9 @@
 </table>
 <br />
 <a th:href="@{/sales}" class="button">販売一覧を見る</a>
+	<!-- footer 呼び出し -->
+	<div th:replace="layout/footer :: footer"></div>
+
+	<script th:src="@{/js/common.js}"></script>
 </body>
 </html>

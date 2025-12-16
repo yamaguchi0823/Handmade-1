@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-	<meta charset="UTF-8">
-	<title>在庫一覧</title>
-	<link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<head th:replace="layout/head :: commonHead(
+    '販売履歴',
+    'ハンドメイド作品の販売履歴を確認できます'
+)"></head>
 
 <body>
 
@@ -97,4 +95,6 @@
 	<!-- footer 呼び出し -->
 	<div th:replace="layout/footer :: footer"></div>
 
+	<script th:src="@{/js/common.js}"></script>
+	</body>
 </html>
