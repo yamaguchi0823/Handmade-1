@@ -1,102 +1,100 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<!-- タイトル -->
-<th:block th:fragment="title">在庫一覧</th:block>
+<head>
+	<meta charset="UTF-8">
+	<title>在庫一覧</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
 
-<!-- コンテンツ -->
-<th:block th:fragment="content">
+<body>
 
-    <h1>在庫一覧（SCR-501）</h1>
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
 
-    <!-- 検索フォーム -->
-	<form method="get" action="/inventory" class="search-form">
-		
-		<input type="text" name="keyword" placeholder="商品名" 
-		th:value="${keyword}" />
-	
-		<input type="text" name="sku" placeholder="SKU" 
-		th:value="${sku}" />
-		
-		<select name="color">
-			<option value="">色を選択</option>
-			<option th:each="c: ${colors}" 
-					th:value="${c}"
-					th:text="${c}" 
-					th:selected="${c == color}"
-					>
-			</option>
-		</select>
-		
-		<select name="size">
-			<option value="">サイズを選択</option>
-			<option th:each="s : ${sizes}"
-					th:value="${s}"
-					th:text="${s}"
-					th:selected="${s == size}"
-					>
-			</option>
-		</select>
-		
-		<select name="stockFilter">
-			<option value="">在庫ステータス</option>
-			       <option value="zero"   th:selected="${stockFilter == 'zero'}">在庫ゼロ</option>
-			       <option value="low"    th:selected="${stockFilter == 'low'}">少ない（1〜5）</option>
-			       <option value="enough" th:selected="${stockFilter == 'enough'}">十分（6以上）</option>
-		</select>
-		
-		<button type="submit">検索</button>
-	</form>
-	
-	<!-- 商品ごとのテーブル表示 -->
-	<div th:with="prevItemId=0">
-	        
+	<main>
+		<h2>在庫一覧</h2>
+		<!-- ここに画面固有の中身 -->
+
+		<!-- 検索フォーム -->
+		<form method="get" action="/inventory" class="search-form">
+
+			<input type="text" name="keyword" placeholder="商品名" th:value="${keyword}" />
+
+			<input type="text" name="sku" placeholder="SKU" th:value="${sku}" />
+
+			<select name="color">
+				<option value="">色を選択</option>
+				<option th:each="c: ${colors}" th:value="${c}" th:text="${c}" th:selected="${c == color}">
+				</option>
+			</select>
+
+			<select name="size">
+				<option value="">サイズを選択</option>
+				<option th:each="s : ${sizes}" th:value="${s}" th:text="${s}" th:selected="${s == size}">
+				</option>
+			</select>
+
+			<select name="stockFilter">
+				<option value="">在庫ステータス</option>
+				<option value="zero" th:selected="${stockFilter == 'zero'}">在庫ゼロ</option>
+				<option value="low" th:selected="${stockFilter == 'low'}">少ない（1〜5）</option>
+				<option value="enough" th:selected="${stockFilter == 'enough'}">十分（6以上）</option>
+			</select>
+
+			<button type="submit">検索</button>
+		</form>
+
+		<!-- 商品ごとのテーブル表示 -->
+		<div th:with="prevItemId=0">
+
 			<!-- 外側ループ：商品ごとに1回だけ処理 -->
 			<div th:each="item : ${itemHeaders}">
-				            
-	            <!-- 商品タイトル（画像 + 商品名） -->
-	            <h2 th:text="${item.itemName}"></h2>
-	            <!-- テーブルヘッダ -->
-	            <table border="1" style="border-collapse: collapse; margin-bottom: 20px; width: 80%;">
-	                <thead>
-	                    <tr>
+
+				<!-- 商品タイトル（画像 + 商品名） -->
+				<h2 th:text="${item.itemName}"></h2>
+				<!-- テーブルヘッダ -->
+				<table border="1" style="border-collapse: collapse; margin-bottom: 20px; width: 80%;">
+					<thead>
+						<tr>
 							<th>画像</th>
-	                        <th>色</th>
-	                        <th>サイズ</th>
+							<th>色</th>
+							<th>サイズ</th>
 							<th>分類</th>
 							<th>入り数</th>
-	                        <th>SKU</th>
-	                        <th>在庫</th>
-	                        <th>価格</th>
-	                        <th>編集</th>
-	                    </tr>
-	                </thead>
+							<th>SKU</th>
+							<th>在庫</th>
+							<th>価格</th>
+							<th>編集</th>
+						</tr>
+					</thead>
 
-	                <tbody>
-	                    <!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
-	                    <tr th:each="row : ${inventory}"
-							th:if="${row.itemId == item.itemId}">
-	
-							<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}" width="80"></td>
-	                        <td th:text="${row.color}"></td>
-	                        <td th:text="${row.size}"></td>
-	                        <td th:text="${row.category}"></td>
-	                        <td th:text="${row.quantityPerSet}"></td>
-	                        <td th:text="${row.skuCode}"></td>
-	                        <td th:text="${row.stock}"></td>
-	                        <td th:text="${row.price}"></td>
-	                        <td>
-	                            <a th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}">編集</a>
-	                        </td>
-	                    </tr>
-	                </tbody>
-	            </table>
-	        </div>
-	    </div>
-		
-</th:block>
+					<tbody>
+						<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
+						<tr th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
-<!-- base.html を適用 -->
-<th:block th:replace="layout/base :: base (~{::title}, ~{::content})"></th:block>
+							<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
+									width="80"></td>
+							<td th:text="${row.color}"></td>
+							<td th:text="${row.size}"></td>
+							<td th:text="${row.category}"></td>
+							<td th:text="${row.quantityPerSet}"></td>
+							<td th:text="${row.skuCode}"></td>
+							<td th:text="${row.stock}"></td>
+							<td th:text="${row.price}"></td>
+							<td>
+								<a
+									th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}">編集</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</main>
+
+	<!-- footer 呼び出し -->
+	<div th:replace="layout/footer :: footer"></div>
 
 </html>

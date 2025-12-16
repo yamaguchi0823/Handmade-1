@@ -1,10 +1,20 @@
-<header th:fragment="header" class="header">
-    <div class="header-title">Handmade Inventory</div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <nav class="nav">
-        <a th:href="@{/}" class="nav-item">Home</a>
-        <a th:href="@{/items}" class="nav-item">商品管理</a>
-        <a th:href="@{/inventory}" class="nav-item">在庫一覧</a>
-        <a th:href="@{/sales}" class="nav-item">販売</a>
-    </nav>
-</header>
+<body>
+
+	<header th:fragment="header" class="app-header">
+		<div class="header-inner">
+			<h1 class="logo">Handmade-1（在庫管理）</h1>
+			<nav>
+				<a th:href="@{/}">Home</a> |
+				<a th:href="@{/items}">商品一覧</a> |
+				<a th:href="@{/sales}">販売履歴</a> |
+				<a th:href="@{/inventory}">在庫一覧</a>
+			</nav>
+		</div>
+	</header>
+
+</body>
+
+</html>
