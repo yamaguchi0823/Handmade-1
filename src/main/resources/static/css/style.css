@@ -47,55 +47,108 @@ table {
 		  padding: 12px;
 		}
 
+		/* 上段（ロゴ+ボタン） */
+		.header-top{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 		/* ロゴ */
 		.logo {
 		  font-size: 1.2rem;
-		  margin: 0 0 8px 0;
+		  margin: 0;
 		}
 
-		/* ナビ（スマホ） */
+		/* ハンバーガーボタン */
+		.menu-btn{
+			font-size: 1.6rem;
+			/* background: none; */
+			border: none;
+			cursor:pointer;
+		}
+
+		/* ===== overlay ===== */
+		.menu-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.4);
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease;
+		z-index: 998;
+		}
+
+		/* ===== nav popup ===== */
 		.nav {
-		background: goldenrod;
-		  display: flex;
-		  flex-direction: column;
-		  gap: 8px;
+			position: fixed;
+			top: 0;
+			right: -300px; /* 画面外に隠す */
+			width: 260px;
+			height: 100vh;
+			background: #fff;
+			padding: 60px 16px 16px;
+			display:  flex;
+			flex-direction: column;
+			gap: 12px;
+			transition: right 0.3s ease;
+			z-index: 999;
+		}
+
+		/* メニュー表示時 */
+		.nav.open{
+			right: 0;
+		}
+		.nav.open + .menu-overlay,
+		.menu-overlay.open{
+			opacity: 1;
+			visibility: visible;
 		}
 
 		.nav a {
-		  display: block;
-		  padding: 10px;
-		  background: #f5f5f5;
-		  text-align: center;
-		  text-decoration: none;
-		  color: #333;
-		  border-radius: 6px;
+			padding:12px;
+			/* background: #f5f5f5; */
+			border-radius: 6px;
+			text-decoration: none;
+			color: #333;
+		}
+		.nav a:hover{
+			background: #f0f0f0;
 		}
 
-		/* 押した感 */
-		.nav a:active {
-		  background: #e0e0e0;
-		}		
-		
+
 		/* ===== PC表示 ===== */
 		@media screen and (min-width: 768px) {
+
+			.menu-overlay{
+				display: none;
+			}
 
 		  .header-inner {
 		    display: flex;
 		    align-items: center;
 		    justify-content: space-between;
 		  }
-
-		  .logo {
-		    margin: 0;
-		  }
-
-		  .nav {
-		    flex-direction: row;
-		    gap: 12px;
+			
+		.menu-btn{
+			  display: none;
+			}
+		.nav {
+			position: static;
+			height: auto;
+			width: auto;
+			/* display:  flex !important; */
+		    /* gap: 12px; */
+			flex-direction:row;
+			background: none;
+			padding: 0;
+			transition: none;
 		  }
 
 		  .nav a {
-		    background: none;
+		    /* background: none; */
 		    padding: 6px 10px;
 		  }
 
