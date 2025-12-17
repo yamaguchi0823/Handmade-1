@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/head :: commonHead(
+<head th:replace="~{layout/head :: commonHead(
     '商品編集',
     'ハンドメイド作品の商品詳細を編集できます'
-)"></head>
+)}"></head>
 
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="layout/header :: header"></div>
+	<div th:replace="~{layout/header :: header}"></div>
 
 	<main>
 		<h2>商品一覧</h2>
@@ -64,7 +64,7 @@
     <br />
     <a th:href="@{/sales}" class="button">販売一覧を見る</a>
     <!-- footer 呼び出し -->
-    <div th:replace="layout/footer :: footer"></div>
+    <div th:replace="~{layout/footer :: footer}"></div>
 
     <script th:src="@{/js/common.js}"></script>
 </body>

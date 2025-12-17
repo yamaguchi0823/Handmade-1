@@ -13,11 +13,28 @@
 			 <div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
 
 			<nav class="nav" id="nav-menu">
-				<a th:href="@{/}" onclick="closeMenu()">Home</a>
-				<a th:href="@{/items}" onclick="closeMenu()">商品一覧</a>
-				<a th:href="@{/sales}" onclick="closeMenu()">販売履歴</a>
-				<a th:href="@{/inventory}" onclick="closeMenu()">在庫一覧</a>
-			</nav>
+
+				  <a th:href="@{/}"
+				     th:classappend="${currentPath == 'home'} ? 'active' : ''">
+				     Home
+				  </a>
+
+				  <a th:href="@{/items}"
+				     th:classappend="${currentPath == 'items'} ? 'active' : ''">
+				     商品
+				  </a>
+
+				  <a th:href="@{/inventory}"
+				     th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
+				     在庫
+				  </a>
+
+				  <a th:href="@{/sales}"
+				     th:classappend="${currentPath == 'sales'} ? 'active' : ''">
+				     販売
+				  </a>
+				</nav>
+
 			
 		</div>
 	</header>

@@ -26,6 +26,7 @@ public class SaleController {
 	@GetMapping
 	public String list(Model model) {
     model.addAttribute("sales", saleService.findAllView());
+    model.addAttribute("currentPath", "sales");
     return "sales/list";
 }
 	

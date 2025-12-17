@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="layout/head :: commonHead(
+<head th:replace="~{layout/head :: commonHead(
     '商品登録',
     'ハンドメイド作品の商品を登録できます'
-)"></head>
+)}"></head>
 
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="layout/header :: header"></div>
+	<div th:replace="~{layout/header :: header}"></div>
 
 	<main>
 		<h2>商品登録</h2>
@@ -34,7 +34,7 @@
 		</form>
 
 		<!-- footer 呼び出し -->
-		<div th:replace="layout/footer :: footer"></div>
+		<div th:replace="~{layout/footer :: footer}"></div>
 
 		<script th:src="@{/js/common.js}"></script>
 

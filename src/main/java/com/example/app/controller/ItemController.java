@@ -29,6 +29,7 @@ public class ItemController {
 	@GetMapping
 	public String list(Model model) {
 		model.addAttribute("items", itemService.findAll());
+		model.addAttribute("currentPath", "items");
 		return "items/list";
 	}
 	
