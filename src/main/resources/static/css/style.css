@@ -5,48 +5,48 @@
 }
 
 table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ccc;
-        }
-        th {
-            background: #f0f0f0;
-        }
-        a.button, button {
-            padding: 6px 10px;
-            margin: 2px;
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            text-decoration: none;
-            border: none;
-            border-radius: 4px;
-        }
-        a.button:hover, button:hover {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+th, td {
+	padding: 8px;
+	border: 1px solid #ccc;
+}
+th {
+	background: #f0f0f0;
+}
+a.button, button {
+	padding: 6px 10px;
+	margin: 2px;
+	display: inline-block;
+	background: #007bff;
+	color: white;
+	text-decoration: none;
+	border: none;
+	border-radius: 4px;
+}
+a.button:hover, button:hover {
             background: #0056b3;
         }
         .danger {
-            background: #d9534f;
+			background: #d9534f;
         }
         .danger:hover {
-            background: #c9302c;
+			background: #c9302c;
         }
 		
 		
 		/* ===== header ===== */
 		.app-header {
-		  background: #fff;
-		  border-bottom: 1px solid #ddd;
+			background: #fff;
+			border-bottom: 1px solid #ddd;
 		}
-
+		
 		.header-inner {
-		  padding: 12px;
+			padding: 12px;
 		}
-
+		
 		/* 上段（ロゴ+ボタン） */
 		.header-top{
 			display: flex;
@@ -55,69 +55,122 @@ table {
 		}
 		/* ロゴ */
 		.logo {
-		  font-size: 1.2rem;
-		  margin: 0;
+			font-size: 1.2rem;
+			margin: 0;
 		}
-
+		
 		/* ハンバーガーボタン */
 		.menu-btn{
-			font-size: 1.6rem;
+			font-size: 1.4rem;
 			/* background: none; */
 			border: none;
 			cursor:pointer;
 		}
-
+		
 		/* ===== overlay ===== */
 		.menu-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		background: rgba(0, 0, 0, 0.4);
-		opacity: 0;
-		visibility: hidden;
-		transition: opacity 0.3s ease;
-		z-index: 998;
+			position: fixed;
+			inset:0;
+			background: rgba(0, 0, 0, 0.45);
+			
+			opacity: 0;
+			visibility: hidden;
+			
+			transition:
+			opacity 0.3s ease,
+			visivility 0.3s ease;
+			
+			z-index: 998;
 		}
-
+		
+		.menu-overlay.open {
+			opacity: 1;
+			visibility: visible;
+		}
+		
 		/* ===== nav popup ===== */
 		.nav {
 			position: fixed;
-			top: 0;
-			right: -300px; /* 画面外に隠す */
-			width: 260px;
+			top: 80px;
+			right: 0;
+			/* right: -350px; 画面外に隠す */
+			width: 300px;
 			height: 100vh;
 			background: #fff;
-			padding: 60px 16px 16px;
+			padding: 30px 16px 16px;
+			
 			display:  flex;
 			flex-direction: column;
 			gap: 12px;
-			transition: right 0.3s ease;
+			/* 初期状態：少し右+透明 */
+			transform: translateX(100%);
+			opacity:0;
+			transition:
+			transform 0.5s ease,
+			opacity 0.25s ease;	
+			
+			border-radius:10px 0 0 0;
 			z-index: 999;
 		}
-
+		
 		/* メニュー表示時 */
 		.nav.open{
-			right: 0;
+			transform: translateX(0);
+			opacity: 1;
 		}
 		.nav.open + .menu-overlay,
 		.menu-overlay.open{
 			opacity: 1;
 			visibility: visible;
 		}
-
+		
 		.nav a {
 			padding:12px;
-			/* background: #f5f5f5; */
 			border-radius: 6px;
 			text-decoration: none;
 			color: #333;
+			transition: background 0.2s ease;
+
+			opacity: 0;
+			transform: translateX(10px);
+
+			transition:
+				opacity 0.25s ease,
+				transform 0.3s ease,
+				background 0.3s ease;
+
+			transition-delay: 0s;
 		}
-		.nav a:hover{
-			background: #f0f0f0;
+		/* メニューが開いたとき */
+		.nav.open a{
+			opacity: 1;
+			transform: translateX(0);
+		}
+		/* スタッガード遅延 */
+		.nav.open a:nth-child(1){
+			transition-delay: 0.1s;
+		}
+		.nav.open a:nth-child(2){
+			transition-delay: 0.2s;
+		}
+		.nav.open a:nth-child(3){
+			transition-delay: 0.35s;
+		}
+		.nav.open a:nth-child(4){
+			transition-delay: 0.5s;
 		}
 
+
+
+		.nav a:hover{
+			/* background: #f0f0f0; */
+			background: yellow;
+		}
+		
+		/* スクロール防止 */
+		body.menu-open{
+			overflow: hidden;
+		}
 
 		/* ===== PC表示 ===== */
 		@media screen and (min-width: 768px) {
@@ -137,12 +190,11 @@ table {
 			}
 		.nav {
 			position: static;
+			transform: none;
+			opacity: 1;
 			height: auto;
 			width: auto;
-			/* display:  flex !important; */
-		    /* gap: 12px; */
 			flex-direction:row;
-			background: none;
 			padding: 0;
 			transition: none;
 		  }
