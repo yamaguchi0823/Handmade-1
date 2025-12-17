@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# 登録した画像ファイル
+uploads/*
