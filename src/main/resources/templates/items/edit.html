@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>商品編集</title>
-<link rel="stylesheet" th:href="@{/css/reset.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+
+<head th:replace="layout/head :: commonHead(
+    '商品編集',
+    'ハンドメイド作品の商品詳細を編集できます'
+)"></head>
+
 <body>
-<h1>商品編集</h1>
 
-<form th:action="@{/items/{id}/edit(id=${item.id})}" method="post">
-	
-	<label>商品名：</label>
-	<input type="text" name="name" th:value="${item.name}" required />
-	<br /><br />
-	
-	<label>カテゴリ：</label>
-	<input type="text" name="category" th:value="${item.category}" />
-	<br /><br />
-	
-	<label>説明：</label>
-	<textarea name="description" cols="40" rows="4"
-		th:text="${item.description}"></textarea>
-	<br /><br />
-	
-	<button type="submit" class="button">更新する</button>
-	<a th:href="@{/items/{id}(id=${item.id})}" class="button">戻る</a>
-</form>
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
 
+	<main>
+		<h2>商品編集</h2>
+		<!-- ここに画面固有の中身 -->
+
+		<form th:action="@{/items/{id}/edit(id=${item.id})}" method="post">
+
+			<label>商品名：</label>
+			<input type="text" name="name" th:value="${item.name}" required />
+			<br /><br />
+
+			<label>カテゴリ：</label>
+			<input type="text" name="category" th:value="${item.category}" />
+			<br /><br />
+
+			<label>説明：</label>
+			<textarea name="description" cols="40" rows="4" th:text="${item.description}"></textarea>
+			<br /><br />
+
+			<button type="submit" class="button">更新する</button>
+			<a th:href="@{/items/{id}(id=${item.id})}" class="button">戻る</a>
+		</form>
+		<!-- footer 呼び出し -->
+		<div th:replace="layout/footer :: footer"></div>
+
+		<script th:src="@{/js/common.js}"></script>
 </body>
+
 </html>

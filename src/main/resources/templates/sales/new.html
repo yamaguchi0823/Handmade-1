@@ -1,55 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>販売登録</title>
-<link rel="stylesheet" th:href="@{/css/reset.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
-<body>
-<h1>販売登録</h1>
 
-<form th:action="@{/sales}" method="post">
-	
-	<!-- 販売日 -->
-	<label>販売日：</label>
-	<input type="date" name="saleDate" required />
-	<br /><br />
-	
-	<!-- バリエーション選択 -->
-	<label>バリエーション</label>
-	<select name="variantId" required>
-		<option value="" desabled selected>選択してください</option>
-		<option th:each="v : ${variants}" 
-				th:value="${v.id}"
-				th:text="${v.itemId + ':' + v.color + '/' + v.size}">
-		</option>
-	</select>
-	<br /><br />
-	
-	<!-- 数量 -->
-	<label>数量</label>
-	<input type="number" name="quantity" value="1" min="1" required="" />
-	<br /><br />
-	
-	<!-- 販売価格 -->
-	<label>販売価格</label>
-	<input type="number" name="salePrice" value="0" min="1" required="" />
-	<br /><br />
-	
-	<!-- チャネル -->
-	<label>チャネル</label>
-	<input type="text" name="channel" placeholder="minne,creemaなど" />
-	<br /><br />
-	
-	<!-- メモ -->
-	<label>メモ</label>
-	<textarea name="memo" cols="40" rows="3"></textarea>
-	<br /><br />
-	<button type="submit" class="button">登録する</button>
-	<br />
-	<a href="/sales" class="button">戻る</a>
-	
-</form>
+<head th:replace="layout/head :: commonHead(
+    '販売登録',
+    'ハンドメイド作品の販売記録を登録できます'
+)"></head>
+
+<body>
+
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
+
+	<main>
+		<h2>販売登録</h2>
+		<!-- ここに画面固有の中身 -->
+
+		<form th:action="@{/sales}" method="post">
+
+			<!-- 販売日 -->
+			<label>販売日：</label>
+			<input type="date" name="saleDate" required />
+			<br /><br />
+
+			<!-- バリエーション選択 -->
+			<label>バリエーション</label>
+			<select name="variantId" required>
+				<option value="" desabled selected>選択してください</option>
+				<option th:each="v : ${variants}" th:value="${v.id}"
+					th:text="${v.itemId + ':' + v.color + '/' + v.size}">
+				</option>
+			</select>
+			<br /><br />
+
+			<!-- 数量 -->
+			<label>数量</label>
+			<input type="number" name="quantity" value="1" min="1" required="" />
+			<br /><br />
+
+			<!-- 販売価格 -->
+			<label>販売価格</label>
+			<input type="number" name="salePrice" value="0" min="1" required="" />
+			<br /><br />
+
+			<!-- チャネル -->
+			<label>チャネル</label>
+			<input type="text" name="channel" placeholder="minne,creemaなど" />
+			<br /><br />
+
+			<!-- メモ -->
+			<label>メモ</label>
+			<textarea name="memo" cols="40" rows="3"></textarea>
+			<br /><br />
+			<button type="submit" class="button">登録する</button>
+			<br />
+			<a href="/sales" class="button">戻る</a>
+
+		</form>
+		<!-- footer 呼び出し -->
+		<div th:replace="layout/footer :: footer"></div>
+
+		<script th:src="@{/js/common.js}"></script>
 </body>
+
 </html>

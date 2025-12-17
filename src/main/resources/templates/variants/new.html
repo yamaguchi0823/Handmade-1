@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>バリエーション登録</title>
-	<link rel="stylesheet" th:href="@{/css/reset.css}" />
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/head :: commonHead(
+    '販売登録',
+    'ハンドメイド作品のバリエーションを登録できます'
+)"></head>
+
 <body>
+
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
+
+	<main>
+		<h2>バリエーション登録</h2>
+		<!-- ここに画面固有の中身 -->
 
 <h1>バリエーション登録</h1>
 
@@ -74,6 +81,9 @@
     <a th:href="@{/items/{id}(id=${item.id})}" class="button">戻る</a>
 
 </form>
+    <!-- footer 呼び出し -->
+    <div th:replace="layout/footer :: footer"></div>
 
+    <script th:src="@{/js/common.js}"></script>
 </body>
 </html>

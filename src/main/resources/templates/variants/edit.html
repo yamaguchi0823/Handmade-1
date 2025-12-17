@@ -1,133 +1,143 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>バリエーション</title>
-<link rel="stylesheet" th:href="@{/css/reset.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+
+<head th:replace="layout/head :: commonHead(
+    'バリエーション編集',
+    'ハンドメイド作品のバリエーションを登録できます'
+)"></head>
+
 <body>
-<h1>バリエーション編集</h1>
 
-<!-- 新商品の情報 -->
-<table>
-	<tr>
-		<th>商品名</th>
-		<td th:text="${item.name}"></td>
-	</tr>
-	<tr>
-		<th>カテゴリ</th>
-		<td th:text="${item.category}"></td>
-	</tr>
-</table>
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
 
-<!-- ============================== -->
-<!-- バリエーション基本編集フォーム -->
-<!-- ============================== -->
-<h2>バリエーション情報</h2>
+	<main>
+		<h2>バリエーション編集</h2>
+		<!-- ここに画面固有の中身 -->
 
-<div th:if="${errorMessage}" class="error">
-    <p th:text="${errorMessage}"></p>
-</div>
+		<!-- 新商品の情報 -->
+		<table>
+			<tr>
+				<th>商品名</th>
+				<td th:text="${item.name}"></td>
+			</tr>
+			<tr>
+				<th>カテゴリ</th>
+				<td th:text="${item.category}"></td>
+			</tr>
+		</table>
 
-<!-- 画像削除ボタン -->
-<div>
-	<!-- すでに画像がある場合だけ表示 -->
-		<div th:if="${variant.imageFilename != null}">
-		    <p>現在の画像：</p>
-		    <img th:src="@{'/uploads/' + ${variant.imageFilename}}" width="200">
+		<!-- ============================== -->
+		<!-- バリエーション基本編集フォーム -->
+		<!-- ============================== -->
+		<h2>バリエーション情報</h2>
+
+		<div th:if="${errorMessage}" class="error">
+			<p th:text="${errorMessage}"></p>
 		</div>
-	
+
+		<!-- 画像削除ボタン -->
+		<div>
+			<!-- すでに画像がある場合だけ表示 -->
+			<div th:if="${variant.imageFilename != null}">
+				<p>現在の画像：</p>
+				<img th:src="@{'/uploads/' + ${variant.imageFilename}}" width="200">
+			</div>
+
+			<form th:if="${variant.imageFilename != null}"
+				th:action="@{/items/{itemId}/variants/{variantId}/delete-image(itemId=${item.id}, variantId=${variant.id})}"
+				method="post">
+				<button type="submit">画像を削除する</button>
+			</form>
+		</div>
+
+		<form th:action="@{/items/{itemId}/variants/{variantId}/edit(itemId=${item.id}, variantId=${variant.id})}"
+			method="post" enctype="multipart/form-data">
+
+			<label>画像：</label>
+			<input type="file" name="imageFile" />
+			<br />
+			<br />
+
+			<label>色：</label>
+			<input type="text" name="color" th:value="${variant.color}" required>
+			<br><br>
+
+			<label>サイズ：</label>
+			<input type="text" name="size" th:value="${variant.size}" required>
+			<br><br>
+
+			<label>分類：</label>
+			<select name="category" required>
+				<option>選択してください</option>
+				<option th:each="c : ${categories}" th:value="${c}" th:text="${c}"
+					th:selected="${c == variant.category}">
+				</option>
+			</select>
+			<br><br>
+
+
+			<label>入り数</label>
+			<input type="number" name="quantityPerSet" min="1" th:value="${variant.quantityPerSet}" required>
+			<br><br>
+
+			<label>原価：</label>
+			<input type="number" name="costPrice" th:value="${variant.costPrice}" min="0" required>
+			<br><br>
+
+			<label>販売価格：</label>
+			<input type="number" name="price" th:value="${variant.price}" min="0" required>
+			<br><br>
+
+			<label>SKUコード：</label>
+			<input type="text" name="skuCode" th:value="${variant.skuCode}">
+			<br><br>
+
+			<button type="submit" class="button">更新する</button>
+		</form>
+		<br />
+		<hr /><br />
+
+		<!-- 在庫更新フォーム -->
+		<h2>在庫数の変更</h2>
 		<form
-		th:if="${variant.imageFilename != null}" 
-		th:action="@{/items/{itemId}/variants/{variantId}/delete-image(itemId=${item.id}, variantId=${variant.id})}"
-		method="post">
-		<button type="submit">画像を削除する</button>
-		</form>		
-</div>
+			th:action="@{/items/{itemId}/variants/{variantId}/stock/update(itemId=${item.id},variantId=${variant.id})}"
+			method="post">
 
-<form th:action="@{/items/{itemId}/variants/{variantId}/edit(itemId=${item.id}, variantId=${variant.id})}"
-      method="post" enctype="multipart/form-data">
-	  
-	<label>画像：</label>
-	<input type="file" name="imageFile" />
-	<br />
-	<br />
-    
-	<label>色：</label>
-    <input type="text" name="color" th:value="${variant.color}" required>
-    <br><br>
+			<p>現在の在庫：<strong th:text="${variant.stock}"></strong></p>
+			<br />
+			<label>入庫数（追加）:</label>
+			<input type="number" name="addQty" min="0" value="0">
+			<br /><br />
+			<label>返品数（減少）：</label>
+			<input type="number" name="subQty" min="0" value="0">
+			<br /><br />
+			<label>※在庫数を強制指定する（棚卸用）</label>
+			<input type="number" name="newStock" min="0" placeholder="未入力の場合は自動計算" />
+			<br /><br />
+			<button type="submit" class="button">在庫数を更新する</button>
+		</form>
+		<br />
+		<hr /><br />
 
-    <label>サイズ：</label>
-    <input type="text" name="size" th:value="${variant.size}" required>
-    <br><br>
-	
-	<label>分類：</label>
-	<select name="category" required>
-		<option>選択してください</option>
-		<option th:each="c : ${categories}" 
-				th:value="${c}"
-				th:text="${c}"
-				th:selected="${c == variant.category}">
-		</option>
-	</select>
-    <br><br>
-	
-	
-	<label>入り数</label>
-	<input type="number" name="quantityPerSet" min="1" th:value="${variant.quantityPerSet}" required>
-    <br><br>
-	
-    <label>原価：</label>
-    <input type="number" name="costPrice" th:value="${variant.costPrice}" min="0" required>
-    <br><br>
+		<!-- ============================== -->
+		<!-- バリエーション削除 -->
+		<!-- ============================== -->
+		<h2>バリエーション削除</h2>
 
-    <label>販売価格：</label>
-    <input type="number" name="price" th:value="${variant.price}" min="0" required>
-    <br><br>
+		<form th:action="@{/items/{itemId}/variants/{variantId}/delete(itemId=${item.id},variantId=${variant.id})}"
+			method="post">
+			<button type="submit" class="button_danger" onclick="return confirm('このバリエーションを削除しますか？')">
+				削除する
+			</button>
+		</form>
+		<br />
 
-    <label>SKUコード：</label>
-    <input type="text" name="skuCode" th:value="${variant.skuCode}">
-    <br><br>
-	
-    <button type="submit" class="button">更新する</button>
-</form>
-<br /><hr /><br />
+		<a th:href="@{/items/{id}(id=${item.id})}" class="button">商品詳細に戻る</a>
+		<!-- footer 呼び出し -->
+		<div th:replace="layout/footer :: footer"></div>
 
-<!-- 在庫更新フォーム -->
-<h2>在庫数の変更</h2>
-<form th:action="@{/items/{itemId}/variants/{variantId}/stock/update(itemId=${item.id},variantId=${variant.id})}"
-	method="post">
-	
-	<p>現在の在庫：<strong th:text="${variant.stock}"></strong></p>	
-	<br />
-	<label>入庫数（追加）:</label>
-	<input type="number" name="addQty" min="0" value="0">
-	<br /><br />
-	<label>返品数（減少）：</label>
-	<input type="number" name="subQty" min="0" value="0">
-	<br /><br />
-	<label>※在庫数を強制指定する（棚卸用）</label>
-	<input type="number" name="newStock" min="0" placeholder="未入力の場合は自動計算" />
-	<br /><br />
-	<button type="submit" class="button">在庫数を更新する</button>
-</form>
-<br /><hr /><br />
-
-<!-- ============================== -->
-<!-- バリエーション削除 -->
-<!-- ============================== -->
-<h2>バリエーション削除</h2>
-
-<form th:action="@{/items/{itemId}/variants/{variantId}/delete(itemId=${item.id},variantId=${variant.id})}"
-	method="post">
-	<button type="submit" class="button_danger" onclick="return confirm('このバリエーションを削除しますか？')">
-		削除する
-	</button>
-</form>
-<br />
-
-<a th:href="@{/items/{id}(id=${item.id})}" class="button">商品詳細に戻る</a>
-
+		<script th:src="@{/js/common.js}"></script>
 </body>
+
 </html>

@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>販売一覧</title>
-<link rel="stylesheet" th:href="@{/css/reset.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+
+<head th:replace="layout/head :: commonHead(
+    '販売一覧',
+    'ハンドメイド作品の販売履歴の一覧を確認できます'
+)"></head>
+
 <body>
-<h1>販売一覧</h1>
 
-<a href="/sales/new" class="button">販売を登録する</a>
-<br /><br />
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
 
-<table>
-	<thead>
-		<tr>	
-			<th>販売日</th>
-			<th>商品/バリエーション</th>
-			<th>数量</th>
-			<th>販売価格</th>
-			<th>販売チャネル</th>
-			<th>メモ</th>	
-		</tr>
-	</thead>
-	<tbody>
-		<tr th:if="${#lists.isEmpty(sales)}">
-			<td colspan="6" style="text-align: center;">
-				販売履歴はありません
-			</td>
-		</tr>
-		<tr th:each="s : ${sales}">
-			<td th:text="${#temporals.format(s.saleDate, 'yyyy-MM-dd')}"></td>
-			<td th:text="${s.itemName + '/' + s.color + '(' + s.size + ')'}"></td>
-			<!--<td th:text="${s.variantId}"></td>-->
-			<td th:text="${s.quantity}"></td>
-			<td th:text="${s.salePrice}"></td>
-			<td th:text="${s.channel}"></td>
-			<td th:text="${s.memo}"></td>
-		</tr>
-	</tbody>
-</table>
-<br />
+	<main>
+		<h2>販売一覧</h2>
+		<!-- ここに画面固有の中身 -->
 
-<a href="/items" class="button">商品一覧へ戻る</a>
+		<a href="/sales/new" class="button">販売を登録する</a>
+		<br /><br />
 
+		<table>
+			<thead>
+				<tr>
+					<th>販売日</th>
+					<th>商品/バリエーション</th>
+					<th>数量</th>
+					<th>販売価格</th>
+					<th>販売チャネル</th>
+					<th>メモ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.isEmpty(sales)}">
+					<td colspan="6" style="text-align: center;">
+						販売履歴はありません
+					</td>
+				</tr>
+				<tr th:each="s : ${sales}">
+					<td th:text="${#temporals.format(s.saleDate, 'yyyy-MM-dd')}"></td>
+					<td th:text="${s.itemName + '/' + s.color + '(' + s.size + ')'}"></td>
+					<!--<td th:text="${s.variantId}"></td>-->
+					<td th:text="${s.quantity}"></td>
+					<td th:text="${s.salePrice}"></td>
+					<td th:text="${s.channel}"></td>
+					<td th:text="${s.memo}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<br />
+
+		<a href="/items" class="button">商品一覧へ戻る</a>
+		<!-- footer 呼び出し -->
+		<div th:replace="layout/footer :: footer"></div>
+
+		<script th:src="@{/js/common.js}"></script>
 </body>
+
 </html>
