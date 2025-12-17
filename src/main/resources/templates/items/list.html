@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout/head :: commonHead(
-    '商品一覧',
-    '登録されているハンドメイド作品の一覧を表示します'
-    )"></head>
+    '商品編集',
+    'ハンドメイド作品の商品詳細を編集できます'
+)"></head>
 
 <body>
-    <!-- header 呼び出し -->
-    <div th:replace="layout/header :: header"></div>
-    <h1>商品一覧</h1>
+
+	<!-- header 呼び出し -->
+	<div th:replace="layout/header :: header"></div>
+
+	<main>
+		<h2>商品一覧</h2>
+		<!-- ここに画面固有の中身 -->
 
     <!-- 新規登録ボタン -->
     <a th:href="@{/items/new}" class="button">商品を登録する</a>
