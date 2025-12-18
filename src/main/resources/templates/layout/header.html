@@ -17,13 +17,13 @@
 			<a th:href="@{/}" th:classappend="${currentPath == 'home'} ? 'active' : ''">
 				Home
 			</a>
+			
+			<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
+				在庫一覧
+			</a>
 
 			<a th:href="@{/items}" th:classappend="${currentPath == 'items'} ? 'active' : ''">
 				作品管理
-			</a>
-
-			<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
-				在庫一覧
 			</a>
 
 			<a th:href="@{/sales}" th:classappend="${currentPath == 'sales'} ? 'active' : ''">
