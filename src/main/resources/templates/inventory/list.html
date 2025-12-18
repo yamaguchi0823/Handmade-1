@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layout/head :: commonHead(
-	'販売履歴',
-	'説明'
+	'在庫一覧',
+	'ハンドメイド作品の在庫状況を確認できます'
 	)}"></head>
 
 
@@ -11,7 +11,7 @@
 	<!-- header 呼び出し -->
 	<div th:replace="~{layout/header :: header('inventory')}"></div>
 
-	<main>
+	<main class="container">
 		<h2>在庫一覧</h2>
 		<!-- ここに画面固有の中身 -->
 
@@ -52,50 +52,81 @@
 
 				<!-- 作品タイトル（画像 + 作品名） -->
 				<h2 th:text="${item.itemName}"></h2>
+
+				<!-- PC用テーブル -->
+				<div class="inventory-table">
 				<!-- テーブルヘッダ -->
-				<table border="1" style="border-collapse: collapse; margin-bottom: 20px; width: 80%;">
-					<thead>
-						<tr>
-							<th>画像</th>
-							<th>色</th>
-							<th>サイズ</th>
-							<th>分類</th>
-							<th>入り数</th>
-							<th>SKU</th>
-							<th>在庫</th>
-							<th>価格</th>
-							<th>編集</th>
-						</tr>
-					</thead>
+					<table>
+						<thead>
+							<tr>
+								<th>画像</th>
+								<th>色</th>
+								<th>サイズ</th>
+								<th>分類</th>
+								<th>入り数</th>
+								<th>SKU</th>
+								<th>在庫</th>
+								<th>価格</th>
+								<th>編集</th>
+							</tr>
+						</thead>
 
-					<tbody>
-						<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
-						<tr th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
+						<tbody>
+							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
+							<tr th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
-							<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
-									width="80"></td>
-							<td th:text="${row.color}"></td>
-							<td th:text="${row.size}"></td>
-							<td th:text="${row.category}"></td>
-							<td th:text="${row.quantityPerSet}"></td>
-							<td th:text="${row.skuCode}"></td>
-							<td th:text="${row.stock}"></td>
-							<td th:text="${row.price}"></td>
-							<td>
-								<a
-									th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}">編集</a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+								<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
+										width="80"></td>
+								<td th:text="${row.color}"></td>
+								<td th:text="${row.size}"></td>
+								<td th:text="${row.category}"></td>
+								<td th:text="${row.quantityPerSet}"></td>
+								<td th:text="${row.skuCode}"></td>
+								<td th:text="${row.stock}"></td>
+								<td th:text="${row.price}"></td>
+								<td>
+									<a
+										th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
+										class="btn btn-secondary">編集</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- /PC用テーブル -->
+				
+				<!-- モバイル用カード -->
+				<div class="inventory-cards">
+					<div class="inventory-card" th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
-			</div>
+
+							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
+							<div class="card-body">
+
+								<p><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
+										width="80"></p>
+								<p>カラー：<span th:text="${row.color}"></span></p>
+								<p>サイズ：<span th:text="${row.size}"></span></p>
+								<p>分類：<span th:text="${row.category}"></span></p>
+								<p>入り数<span th:text="${row.quantityPerSet}"></span></p>
+								<p>SKUコード：<span th:text="${row.skuCode}"></span></p>
+								<p><span th:text="${row.stock}"></span></p>
+								<p><span th:text="${row.price}"></span></p>
+								<div class="card-actions">
+									<a th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
+										class="btn btn-secondary">編集</a>
+								</div>
+							</div>
+					</div>
+				</div><!-- モバイル用 -->
+
+			</div><!-- /外側ループ -->
 		</div>
+		
 	</main>
-
+	
 	<!-- footer 呼び出し -->
 	<div th:replace="~{layout/footer :: footer}"></div>
-
+	
 	<script th:src="@{/js/common.js}"></script>
 	</body>
 </html>
