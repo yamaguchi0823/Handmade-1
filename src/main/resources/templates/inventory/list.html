@@ -9,7 +9,7 @@
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="~{layout/header :: header}"></div>
+	<div th:replace="~{layout/header :: header('inventory')}"></div>
 
 	<main>
 		<h2>在庫一覧</h2>
@@ -18,7 +18,7 @@
 		<!-- 検索フォーム -->
 		<form method="get" action="/inventory" class="search-form">
 
-			<input type="text" name="keyword" placeholder="商品名" th:value="${keyword}" />
+			<input type="text" name="keyword" placeholder="作品名" th:value="${keyword}" />
 
 			<input type="text" name="sku" placeholder="SKU" th:value="${sku}" />
 
@@ -44,13 +44,13 @@
 			<button type="submit">検索</button>
 		</form>
 
-		<!-- 商品ごとのテーブル表示 -->
+		<!-- 作品ごとのテーブル表示 -->
 		<div th:with="prevItemId=0">
 
-			<!-- 外側ループ：商品ごとに1回だけ処理 -->
+			<!-- 外側ループ：作品ごとに1回だけ処理 -->
 			<div th:each="item : ${itemHeaders}">
 
-				<!-- 商品タイトル（画像 + 商品名） -->
+				<!-- 作品タイトル（画像 + 作品名） -->
 				<h2 th:text="${item.itemName}"></h2>
 				<!-- テーブルヘッダ -->
 				<table border="1" style="border-collapse: collapse; margin-bottom: 20px; width: 80%;">

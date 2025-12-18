@@ -9,16 +9,16 @@
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="~{layout/header :: header}"></div>
+	<div th:replace="~{layout/header :: header('variantsEdit')}"></div>
 
 	<main>
 		<h2>バリエーション編集</h2>
 		<!-- ここに画面固有の中身 -->
 
-		<!-- 新商品の情報 -->
+		<!-- 新作品の情報 -->
 		<table>
 			<tr>
-				<th>商品名</th>
+				<th>作品名</th>
 				<td th:text="${item.name}"></td>
 			</tr>
 			<tr>
@@ -133,7 +133,7 @@
 		</form>
 		<br />
 
-		<a th:href="@{/items/{id}(id=${item.id})}" class="button">商品詳細に戻る</a>
+		<a th:href="@{/items/{id}(id=${item.id})}" class="button">作品詳細に戻る</a>
 		<!-- footer 呼び出し -->
 		<div th:replace="~{layout/footer :: footer}"></div>
 

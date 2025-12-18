@@ -1,40 +1,37 @@
-	<header th:fragment="header" class="app-header">
-		<div class="header-inner">
+<header th:fragment="header(currentPath)" class="app-header">
+	<div class="header-inner">
 
-			<div class="header-top">
-				<h1 class="logo">Handmade-1（在庫管理）</h1>
+		<div class="header-top">
+			<h1 class="logo">Handmade-1（在庫販売管理）</h1>
 
-				<!-- ハンバーガーボタン -->
-				 <button class="menu-btn" onclick="toggleMenu()">
-					☰
-				</button>
-			</div>
-			<!-- オーバーレイ -->
-			 <div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
-
-			<nav class="nav" id="nav-menu">
-
-				  <a th:href="@{/}"
-				     th:classappend="${currentPath == 'home'} ? 'active' : ''">
-				     Home
-				  </a>
-
-				  <a th:href="@{/items}"
-				     th:classappend="${currentPath == 'items'} ? 'active' : ''">
-				     商品
-				  </a>
-
-				  <a th:href="@{/inventory}"
-				     th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
-				     在庫
-				  </a>
-
-				  <a th:href="@{/sales}"
-				     th:classappend="${currentPath == 'sales'} ? 'active' : ''">
-				     販売
-				  </a>
-				</nav>
-
-			
+			<!-- ハンバーガーボタン -->
+			<button class="menu-btn" onclick="toggleMenu()">
+				☰
+			</button>
 		</div>
-	</header>
+		<!-- オーバーレイ -->
+		<div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
+
+		<nav class="nav" id="nav-menu">
+
+			<a th:href="@{/}" th:classappend="${currentPath == 'home'} ? 'active' : ''">
+				Home
+			</a>
+
+			<a th:href="@{/items}" th:classappend="${currentPath == 'items'} ? 'active' : ''">
+				作品管理
+			</a>
+
+			<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
+				在庫一覧
+			</a>
+
+			<a th:href="@{/sales}" th:classappend="${currentPath == 'sales'} ? 'active' : ''">
+				販売管理
+			</a>
+
+		</nav>
+
+
+	</div>
+</header>

@@ -2,28 +2,28 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layout/head :: commonHead(
-    '商品詳細',
-    'ハンドメイド作品の商品詳細を確認できます'
+    '作品詳細',
+    'ハンドメイド作品の作品詳細を確認できます'
 )}"></head>
 
 <body>
 
     <!-- header 呼び出し -->
-    <div th:replace="~{layout/header :: header}"></div>
+    <div th:replace="~{layout/header :: header('itemsDetail')}"></div>
 
     <main>
-        <h2>商品詳細</h2>
+        <h2>作品詳細</h2>
         <!-- ここに画面固有の中身 -->
 
 
-        <!-- 商品情報 -->
+        <!-- 作品情報 -->
         <table>
             <tr>
-                <th>商品名</th>
+                <th>作品名</th>
                 <td th:text="${item.name}"></td>
             </tr>
             <tr>
-                <th>商品カテゴリ</th>
+                <th>作品カテゴリ</th>
                 <td th:text="${item.category}"></td>
             </tr>
             <tr>
@@ -41,7 +41,7 @@
         <a th:href="@{/items/{id}/edit(id=${item.id})}" class="button">編集</a>
 
         <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline;">
-            <button type="submit" class="button danger" onclick="return confirm('商品を削除しますか？');">
+            <button type="submit" class="button danger" onclick="return confirm('作品を削除しますか？');">
                 削除
             </button>
         </form>
@@ -102,7 +102,7 @@
         </table>
 
         <br>
-        <a href="/items" class="button">商品一覧に戻る</a>
+        <a href="/items" class="button">作品一覧に戻る</a>
 
         <!-- footer 呼び出し -->
         <div th:replace="~{layout/footer :: footer}"></div>

@@ -2,22 +2,22 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layout/head :: commonHead(
-    '商品編集',
-    'ハンドメイド作品の商品詳細を編集できます'
+    '作品編集',
+    'ハンドメイド作品の作品詳細を編集できます'
 )}"></head>
 
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="~{layout/header :: header}"></div>
+	<div th:replace="~{layout/header :: header('itemsEdit')}"></div>
 
 	<main>
-		<h2>商品編集</h2>
+		<h2>作品編集</h2>
 		<!-- ここに画面固有の中身 -->
 
 		<form th:action="@{/items/{id}/edit(id=${item.id})}" method="post">
 
-			<label>商品名：</label>
+			<label>作品名：</label>
 			<input type="text" name="name" th:value="${item.name}" required />
 			<br /><br />
 

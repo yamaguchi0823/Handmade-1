@@ -2,22 +2,22 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layout/head :: commonHead(
-    '商品登録',
-    'ハンドメイド作品の商品を登録できます'
+    '作品登録',
+    'ハンドメイド作品の作品を登録できます'
 )}"></head>
 
 <body>
 
 	<!-- header 呼び出し -->
-	<div th:replace="~{layout/header :: header}"></div>
+	<div th:replace="~{layout/header :: header('itemsNew')}"></div>
 
 	<main>
-		<h2>商品登録</h2>
+		<h2>作品登録</h2>
 		<!-- ここに画面固有の中身 -->
 
 		<form th:action="@{/items}" method="post">
 
-			<label>商品名：</label>
+			<label>作品名：</label>
 			<input type="text" name="name" required />
 			<br /><br />
 
