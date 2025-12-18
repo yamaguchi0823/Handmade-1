@@ -2,7 +2,7 @@
 	<div class="header-inner">
 
 		<div class="header-top">
-			<h1 class="logo">Handmade-1（在庫管理）</h1>
+			<h1 class="logo">Handmade-1（在庫販売管理）</h1>
 
 			<!-- ハンバーガーボタン -->
 			<button class="menu-btn" onclick="toggleMenu()">
@@ -13,28 +13,23 @@
 		<div id="menu-overlay" class="menu-overlay" onclick="closeMenu()"></div>
 
 		<nav class="nav" id="nav-menu">
-			<ul>
-				<li>
-					<a th:href="@{/}" th:classappend="${currentPath == 'home'} ? 'active' : ''">
-						Home
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/items}" th:classappend="${currentPath == 'items'} ? 'active' : ''">
-						作品一覧
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
-						在庫一覧
-					</a>
-				</li>
-				<li>
-					<a th:href="@{/sales}" th:classappend="${currentPath == 'sales'} ? 'active' : ''">
-						販売一覧
-					</a>
-				</li>
-			</ul>
+
+			<a th:href="@{/}" th:classappend="${currentPath == 'home'} ? 'active' : ''">
+				Home
+			</a>
+
+			<a th:href="@{/items}" th:classappend="${currentPath == 'items'} ? 'active' : ''">
+				作品管理
+			</a>
+
+			<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
+				在庫一覧
+			</a>
+
+			<a th:href="@{/sales}" th:classappend="${currentPath == 'sales'} ? 'active' : ''">
+				販売管理
+			</a>
+
 		</nav>
 
 
