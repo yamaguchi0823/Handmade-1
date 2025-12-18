@@ -58,11 +58,6 @@ public class InventoryController {
         model.addAttribute("color", color);
         model.addAttribute("size", size);
         model.addAttribute("stockFilter", stockFilter);
-        
-     // ------------------------
-        // 今の画面を渡す
-     // ------------------------
-        model.addAttribute("currentPath", "inventory");
 
         return "inventory/list";
     }

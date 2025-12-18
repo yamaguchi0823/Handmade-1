@@ -1,4 +1,4 @@
-	<header th:fragment="header" class="app-header">
+	<header th:fragment="header(currentPath)" class="app-header">
 		<div class="header-inner">
 
 			<div class="header-top">
@@ -21,17 +21,17 @@
 
 				  <a th:href="@{/items}"
 				     th:classappend="${currentPath == 'items'} ? 'active' : ''">
-				     商品
+				     商品一覧
 				  </a>
 
 				  <a th:href="@{/inventory}"
 				     th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
-				     在庫
+				     在庫一覧
 				  </a>
 
 				  <a th:href="@{/sales}"
 				     th:classappend="${currentPath == 'sales'} ? 'active' : ''">
-				     販売
+				     販売一覧
 				  </a>
 				</nav>
 
