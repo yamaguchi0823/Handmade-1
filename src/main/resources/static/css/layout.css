@@ -1,53 +1,21 @@
-@charset "UTF-8";
-
-.error {
-	color: red;
-	font-weight: bold;
+/* =========================
+   Layout
+========================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
 }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
+main {
+  padding-bottom: 80px;
 }
 
-th,
-td {
-	padding: 8px;
-	border: 1px solid #ccc;
-}
+/* =========================
+   Header / Footer
+========================= */
 
-th {
-	background: #f0f0f0;
-}
-
-a.button,
-button {
-	padding: 6px 10px;
-	margin: 2px;
-	display: inline-block;
-	background: #007bff;
-	color: white;
-	text-decoration: none;
-	border: none;
-	border-radius: 4px;
-}
-
-a.button:hover,
-button:hover {
-	background: #0056b3;
-}
-
-.danger {
-	background: #d9534f;
-}
-
-.danger:hover {
-	background: #c9302c;
-}
-
-
-/* ===== header ===== */
+/* ===== もともとの　header ===== */
 .app-header {
 	background: #fff;
 	border-bottom: 1px solid #ddd;
@@ -56,7 +24,6 @@ button:hover {
 .header-inner {
 	padding: 12px;
 }
-
 /* 上段（ロゴ+ボタン） */
 .header-top {
 	display: flex;
@@ -230,4 +197,28 @@ body.menu-open {
 		background: #e0e0e0;
 		text-decoration: underline;
 	}
+}
+
+/* ===== /もともとの　header ===== */
+
+
+
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #555;
+}
+
+.header-nav a.active {
+  font-weight: bold;
+  color: #2c7be5;
 }
