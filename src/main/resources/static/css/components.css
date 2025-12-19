@@ -44,6 +44,27 @@ th {
   color: #fff;
 }
 
+/* ここから自分設定 */
+.btn-primary-L{
+  background: #1BD896;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  margin: 16px auto;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
+  display: block;
+  border-radius: 50px;
+}
+
+.btn-danger {
+  background: tomato;
+  border: 2px solid tomato;
+  color: #fff;
+}
+
+
 /* =========================
    Mobile
 ========================= */
