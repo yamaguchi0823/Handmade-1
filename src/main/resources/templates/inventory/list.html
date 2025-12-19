@@ -18,28 +18,35 @@
 		<!-- 検索フォーム -->
 		<form method="get" action="/inventory" class="search-form">
 
-			<input type="text" name="keyword" placeholder="作品名" th:value="${keyword}" />
-
-			<input type="text" name="sku" placeholder="SKU" th:value="${sku}" />
-
-			<select name="color">
-				<option value="">色を選択</option>
-				<option th:each="c: ${colors}" th:value="${c}" th:text="${c}" th:selected="${c == color}">
-				</option>
-			</select>
-
-			<select name="size">
-				<option value="">サイズを選択</option>
-				<option th:each="s : ${sizes}" th:value="${s}" th:text="${s}" th:selected="${s == size}">
-				</option>
-			</select>
-
-			<select name="stockFilter">
-				<option value="">在庫ステータス</option>
-				<option value="zero" th:selected="${stockFilter == 'zero'}">在庫ゼロ</option>
-				<option value="low" th:selected="${stockFilter == 'low'}">少ない（1〜5）</option>
-				<option value="enough" th:selected="${stockFilter == 'enough'}">十分（6以上）</option>
-			</select>
+			<div class="inputs">
+				<input type="text" name="keyword" placeholder="作品名" th:value="${keyword}" />
+				<input type="text" name="sku" placeholder="SKU" th:value="${sku}" />
+			</div><!-- /inputs -->
+			
+			<div class="selects">	
+				<div class="select_wrap">
+					<select name="color">
+						<option value="">色を選択</option>
+						<option th:each="c: ${colors}" th:value="${c}" th:text="${c}" th:selected="${c == color}">
+						</option>
+					</select>
+				</div>
+				<div class="select_wrap">
+					<select name="size">
+						<option value="">サイズを選択</option>
+						<option th:each="s : ${sizes}" th:value="${s}" th:text="${s}" th:selected="${s == size}">
+						</option>
+					</select>
+				</div>
+				<div class="select_wrap">	
+					<select name="stockFilter">
+						<option value="">在庫ステータス</option>
+						<option value="zero" th:selected="${stockFilter == 'zero'}">在庫ゼロ</option>
+						<option value="low" th:selected="${stockFilter == 'low'}">少ない（1〜5）</option>
+						<option value="enough" th:selected="${stockFilter == 'enough'}">十分（6以上）</option>
+					</select>
+				</div>
+			</div><!-- /selects -->
 
 			<button type="submit">検索</button>
 		</form>
@@ -60,13 +67,13 @@
 						<thead>
 							<tr>
 								<th>画像</th>
-								<th>色</th>
+								<th>色/SKU</th>
 								<th>サイズ</th>
 								<th>分類</th>
 								<th>入り数</th>
-								<th>SKU</th>
-								<th>在庫</th>
 								<th>価格</th>
+								<th>在庫</th>
+								<!-- <th>SKU</th> -->
 								<th>編集</th>
 							</tr>
 						</thead>
@@ -75,19 +82,20 @@
 							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
 							<tr th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
-								<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
-										width="80"></td>
-								<td th:text="${row.color}"></td>
-								<td th:text="${row.size}"></td>
-								<td th:text="${row.category}"></td>
-								<td th:text="${row.quantityPerSet}"></td>
-								<td th:text="${row.skuCode}"></td>
-								<td th:text="${row.stock}"></td>
-								<td th:text="${row.price}"></td>
+								<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"></td>
+								<td><span th:text="${row.color}"></span><br>
+									<span class="sku" th:text="${row.skuCode}"></span></td>
+								<td><span th:text="${row.size}"></span></td>
+								<td><span th:text="${row.category}"></span></td>
+								<td><span th:text="${row.quantityPerSet}"></span>個入り</td>
+								<td><span th:text="${row.price}"></span>円</td>
+								<td><span th:text="${row.stock}"></span>個</td>
+								<!-- <td><span th:text="${row.skuCode}"></span></td> -->
 								<td>
 									<a
 										th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
-										class="btn btn-secondary">編集</a>
+										class="btn btn-secondary">
+									<i class="fa-regular fa-pen-to-square"></i></a>
 								</td>
 							</tr>
 						</tbody>
@@ -101,19 +109,25 @@
 
 							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
 							<div class="card-body">
-
-								<p><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
-										width="80"></p>
-								<p>カラー：<span th:text="${row.color}"></span></p>
-								<p>サイズ：<span th:text="${row.size}"></span></p>
-								<p>分類：<span th:text="${row.category}"></span></p>
-								<p>入り数<span th:text="${row.quantityPerSet}"></span></p>
-								<p>SKUコード：<span th:text="${row.skuCode}"></span></p>
-								<p><span th:text="${row.stock}"></span></p>
-								<p><span th:text="${row.price}"></span></p>
+								<!-- <p class="v_category"><span th:text="${row.category}"></span></p> -->
+								<div class="card-top">
+									<p><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"></p>
+									<p class="v_category"><span th:text="${row.category}"></span></p>
+									<ul>
+										<h3><span th:text="${row.color}"></span></h3>
+										<div class="v_detail">
+											<li><span th:text="${row.size}"></span></li>
+											<li>入数：<span th:text="${row.quantityPerSet}"></span></li>									
+										</div>
+										<li>販売価格：<span th:text="${row.price}"></span>円</li>
+										<li>在庫：<span th:text="${row.stock}"></span>個</li>
+										<!-- <li>SKUコード：<span th:text="${row.skuCode}"></span></li> -->
+										</ul>
+									</div>
 								<div class="card-actions">
 									<a th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
-										class="btn btn-secondary">編集</a>
+										class="btn btn-secondary">
+										<i class="fa-regular fa-pen-to-square"></i></a>
 								</div>
 							</div>
 					</div>

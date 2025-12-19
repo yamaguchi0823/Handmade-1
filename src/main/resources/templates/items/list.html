@@ -11,17 +11,20 @@
 	<!-- header 呼び出し -->
 	<div th:replace="~{layout/header :: header('items')}"></div>
 
-	<main>
+	<main class="container">
 		<h2>作品一覧</h2>
 		<!-- ここに画面固有の中身 -->
 
     <!-- 新規登録ボタン -->
     <a th:href="@{/items/new}" class="button">作品を登録する</a>
 
+    <!-- PC用テーブル -->
+	<div class="inventory-table">
     <!-- 作品一覧テーブル -->
     <table>
         <thead>
             <tr>
+                <th>画像</th>
                 <th>作品名</th>
                 <th>作品カテゴリ</th>
                 <th>説明</th>
@@ -38,6 +41,7 @@
 
             <!-- items が存在する場合 -->
             <tr th:each="item : ${items}">
+                <td><img th:src="@{/images/noimage.png'}"></td>
                 <td th:text="${item.name}"></td>
                 <td th:text="${item.category}"></td>
                 <td th:text="${item.description}"></td>
@@ -61,6 +65,7 @@
 
         </tbody>
     </table>
+    </div><!-- /inventory-table -->
     <br />
     <a th:href="@{/sales}" class="button">販売一覧を見る</a>
     <!-- footer 呼び出し -->
