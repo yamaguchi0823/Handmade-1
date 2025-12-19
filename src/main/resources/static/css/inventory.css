@@ -42,10 +42,72 @@
   .card-body p {
     margin: 4px 0;
     font-size: 0.85rem;
+    width: 50%;
+    max-width: 150px;
+  }
+
+  .card-body p img {
+    width: 100%;
+  }
+
+  .card-body .card-top{
+    display: flex;
+    flex-direction: row;
+  }
+  .card-top ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 16px;
+  }
+  .card-top ul h3{
+    margin: 0;
+  }
+
+  .card-top .color{
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .card-body .v_category{
+    position: absolute;
+    left: 32px;
+    margin-top: 12px;
+  }
+  .card-body .v_category span{
+    background: #1BD896;
+    border-radius:100px;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 14px;
+  }
+
+  .card-body .v_detail{
+    display: flex;
+    flex-direction: row;
+    margin: 8px 0;
+  }
+  .card-body .v_detail li{
+    margin-right: 8px;
+    font-size: 14px;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 50px;
   }
 
   .card-actions {
-    margin-top: 8px;
-    text-align: right;
+    /* margin-top: 8px; */
+    /* text-align: right; */
+    display: inline;
+    position: absolute;
+    right: 32px;
+    margin-top: -32px;
   }
+
 }
+
+
+/* =========================
+   PC
+========================= */

@@ -101,19 +101,24 @@
 
 							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
 							<div class="card-body">
-
-								<p><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"
-										width="80"></p>
-								<p>カラー：<span th:text="${row.color}"></span></p>
-								<p>サイズ：<span th:text="${row.size}"></span></p>
-								<p>分類：<span th:text="${row.category}"></span></p>
-								<p>入り数<span th:text="${row.quantityPerSet}"></span></p>
-								<p>SKUコード：<span th:text="${row.skuCode}"></span></p>
-								<p><span th:text="${row.stock}"></span></p>
-								<p><span th:text="${row.price}"></span></p>
+								<!-- <p class="v_category"><span th:text="${row.category}"></span></p> -->
+								<div class="card-top">
+									<p><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"></p>
+									<p class="v_category"><span th:text="${row.category}"></span></p>
+									<ul>
+										<h3><span th:text="${row.color}"></span></h3>
+										<div class="v_detail">
+											<li><span th:text="${row.size}"></span></li>
+											<li>入数：<span th:text="${row.quantityPerSet}"></span></li>									
+										</div>
+										<li>在庫：<span th:text="${row.stock}"></span></li>
+										<li>販売価格：<span th:text="${row.price}"></span>円</li>
+										<!-- <li>SKUコード：<span th:text="${row.skuCode}"></span></li> -->
+										</ul>
+									</div>
 								<div class="card-actions">
 									<a th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
-										class="btn btn-secondary">編集</a>
+										class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a>
 								</div>
 							</div>
 					</div>
