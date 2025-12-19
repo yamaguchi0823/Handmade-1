@@ -1,7 +1,7 @@
 /* =========================
    form
 ========================= */
-form {
+form.search-form{
   background: #fff;
   border-radius: 10px;
   border:1px solid #eee;
@@ -74,20 +74,6 @@ form .select_wrap::before{
   border-top: 3px solid #1BD896;
   border-left: 3px solid #1BD896;
   transform: translateY(-50%) rotate(-135deg);
-}
-
-
-form button[type="submit"]{
-  background: #1BD896;
-  border: none;
-  padding: 8px;
-  margin: 16px auto;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  width: 100%;
-  display: block;
-  border-radius: 50px;
 }
 
 
@@ -220,22 +206,4 @@ form button[type="submit"]{
 .inventory-table .sku{
   font-size: 12px;
   color: #999;
-}
-
-/* =========================
-   form（PC）
-========================= */
-
-form::after{
-  content:'';
-  width: 100%;
-}
-form input{
-
-}
-form .selects{
-}
-form .select_wrap {
-}
-
 }

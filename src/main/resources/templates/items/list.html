@@ -49,15 +49,17 @@
                 <td>
 
                     <!-- 詳細 -->
-                    <a th:href="@{/items/{id}(id=${item.id})}" class="button">詳細</a>
+                    <a th:href="@{/items/{id}(id=${item.id})}" 
+                        class="btn btn-secondary">詳細</a>
 
                     <!-- 編集 -->
-                    <a th:href="@{/items/{id}/edit(id=${item.id})}" class="button">編集</a>
+                    <a th:href="@{/items/{id}/edit(id=${item.id})}" 
+                        class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a>
 
                     <!-- 削除（POST） -->
                     <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="button danger" onclick="return confirm('本当に削除しますか？');">
-                            削除
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？');">
+                            <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </form>
                 </td>
