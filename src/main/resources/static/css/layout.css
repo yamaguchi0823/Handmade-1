@@ -12,7 +12,7 @@ main {
 }
 
 /* =========================
-   Header / Footer
+   Header
 ========================= */
 
 /* ===== もともとの　header ===== */
@@ -203,8 +203,6 @@ body.menu-open {
 
 /* ===== /もともとの　header ===== */
 
-
-
 .header {
   background: #ffffff;
   border-bottom: 1px solid #ddd;
@@ -223,4 +221,14 @@ body.menu-open {
 .header-nav a.active {
   font-weight: bold;
   color: #2c7be5;
+}
+
+/* =========================
+   Footer
+========================= */
+footer{
+	max-width: 1200px;
+	padding: 16px;
+	margin: auto;
+	text-align: center;
 }

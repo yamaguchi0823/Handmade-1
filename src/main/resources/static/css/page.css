@@ -1,0 +1,132 @@
+/* =========================
+  在庫一覧　List-TABLE（PC）
+========================= */
+
+/* 初期状態：PC（テーブル） */
+#inventory .list-table {
+  display: block;
+}
+#inventory .list-cards {
+  display: none;
+}
+
+/* =========================
+    在庫一覧　List-cardsS（MB）
+========================= */
+@media (max-width: 768px) {
+
+  /* テーブルは非表示 */
+  #inventory .list-table {
+    display: none;
+  }
+
+  /* カード表示 */
+  #inventory .list-cards {
+    display: grid;
+    gap: 12px;
+  }
+
+  #inventory .list-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  #inventory .card-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  #inventory .card-body{
+    background: #fff;
+    border-radius: 5px;
+    padding: 12px;
+    height: 180px;
+  }
+
+  #inventory .card-body p {
+    margin: 4px 0;
+    font-size: 0.85rem;
+    width: 50%;
+    max-width: 150px;
+  }
+
+  #inventory .card-body p img {
+    width: 100%;
+  }
+
+  #inventory .card-body .card-top{
+    display: flex;
+    flex-direction: row;
+  }
+  #inventory .card-top ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 16px;
+  }
+  #inventory .card-top ul h3{
+    margin: 0;
+  }
+
+  #inventory .card-top .color{
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  #inventory .card-body .v_category{
+    position: absolute;
+    left: 32px;
+    margin-top: 12px;
+  }
+  #inventory .card-body .v_category span{
+    background: #1BD896;
+    border-radius:100px;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 14px;
+  }
+
+  #inventory .card-body .v_detail{
+    display: flex;
+    flex-direction: row;
+    margin: 8px 0;
+  }
+  #inventory .card-body .v_detail li{
+    margin-right: 8px;
+    font-size: 14px;
+    background: #eee;
+    padding: 2px 8px;
+    border-radius: 50px;
+  }
+
+  #inventory .card-actions {
+    display: inline;
+    position: absolute;
+    right: 32px;
+    margin-top: 132px;
+  }
+
+}
+
+/* =========================
+    作品一覧
+========================= */
+#items #item-id{width: 10vw;}
+/* #items #item-name{width: 25vw;} */
+/* #items #item-category{width: 25vw;}
+#items #item-discription{width: 10vw;} 
+#items #item-created{width: 10vw;}*/
+#items #item-action{width: 10vw;}
+
+/* PC表示 */
+@media screen and (min-width: 768px) {
+#items #item-id{width: 2vw;}
+#items #item-name{width: 20vw;}
+#items #item-category{width: 20vw;}
+#items #item-discription{width: 20vw;}
+#items #item-created{width: 10vw;}
+#items #item-action{width: 10vw;}
+}

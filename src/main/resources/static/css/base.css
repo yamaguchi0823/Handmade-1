@@ -11,3 +11,15 @@ body {
   background-color: #f5f6f8;
   color: #333;
 }
+
+.bold {font-weight: bold;}
+
+
+/* PCだけ */
+@media screen and (max-width: 768px) {
+  .spHide{display: none;}
+}
+
+@media screen and (min-width: 768px) {
+  .pcHide{display: none;}
+}

@@ -4,9 +4,7 @@
 	'在庫一覧',
 	'ハンドメイド作品の在庫状況を確認できます'
 	)}"></head>
-
-
-<body>
+<body id="inventory">
 
 	<!-- header 呼び出し -->
 	<div th:replace="~{layout/header :: header('inventory')}"></div>
@@ -56,20 +54,34 @@
 
 			<!-- 外側ループ：作品ごとに1回だけ処理 -->
 			<div th:each="item : ${itemHeaders}">
-
-				<!-- 作品タイトル（画像 + 作品名） -->
-				<h2 th:text="${item.itemName}"></h2>
+				
+				<!-- 作品タイトル（作品名） -->
+				<h2 class="index-main" >
+					<span th:text="${item.itemName}"></span>
+					<span th:text="${item.category}" class="icon-item-category"></span>
+				</h2>
 
 				<!-- PC用テーブル -->
-				<div class="inventory-table">
+				<div class="list-table">
 				<!-- テーブルヘッダ -->
 					<table>
+						<colgroup>
+							<col style="width: 5%;">
+							<col style="width: 20%;">
+							<col style="width: 25%;">
+							<col style="width: 5%;">
+							<col style="width: 5%;">
+							<col style="width: 5%;">
+							<col style="width: 5%;">
+							<!-- <col style="width: 5%;"> -->
+							<col style="width: 5%;">
+						</colgroup>
 						<thead>
 							<tr>
 								<th>画像</th>
+								<th>分類</th>
 								<th>色/SKU</th>
 								<th>サイズ</th>
-								<th>分類</th>
 								<th>入り数</th>
 								<th>価格</th>
 								<th>在庫</th>
@@ -83,13 +95,13 @@
 							<tr th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
 								<td><img th:src="@{${row.imagePath != null ? row.imagePath : '/images/noimage.png'}}"></td>
+								<td><span th:text="${row.category}"></span></td>
 								<td><span th:text="${row.color}"></span><br>
 									<span class="sku" th:text="${row.skuCode}"></span></td>
 								<td><span th:text="${row.size}"></span></td>
-								<td><span th:text="${row.category}"></span></td>
 								<td><span th:text="${row.quantityPerSet}"></span>個入り</td>
 								<td><span th:text="${row.price}"></span>円</td>
-								<td><span th:text="${row.stock}"></span>個</td>
+								<td class="bold"><span th:text="${row.stock}"></span>個</td>
 								<!-- <td><span th:text="${row.skuCode}"></span></td> -->
 								<td>
 									<a
@@ -103,8 +115,8 @@
 				</div><!-- /PC用テーブル -->
 				
 				<!-- モバイル用カード -->
-				<div class="inventory-cards">
-					<div class="inventory-card" th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
+				<div class="list-cards">
+					<div class="list-cards" th:each="row : ${inventory}" th:if="${row.itemId == item.itemId}">
 
 
 							<!-- 内側ループ：該当 itemId のバリエーションだけ表示 -->
@@ -124,13 +136,12 @@
 										<!-- <li>SKUコード：<span th:text="${row.skuCode}"></span></li> -->
 										</ul>
 									</div>
+								</div>
 								<div class="card-actions">
 									<a th:href="@{'/items/' + ${row.itemId} + '/variants/' + ${row.variantId} + '/edit'}" 
-										class="btn btn-secondary">
-										<i class="fa-regular fa-pen-to-square"></i></a>
+										class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a>
 								</div>
 							</div>
-					</div>
 				</div><!-- モバイル用 -->
 
 			</div><!-- /外側ループ -->
