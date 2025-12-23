@@ -6,13 +6,13 @@
     'ハンドメイド作品の作品詳細を確認できます'
 )}"></head>
 
-<body>
+<body id="itemsDetail">
 
     <!-- header 呼び出し -->
     <div th:replace="~{layout/header :: header('itemsDetail')}"></div>
 
     <main class="container">
-        <h2>作品詳細</h2>
+        <h2>作品の詳細</h2>
         <!-- ここに画面固有の中身 -->
 
 
@@ -35,24 +35,27 @@
                 <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
             </tr>
         </table>
-
         <br />
-        <!-- 編集・削除 -->
-        <a th:href="@{/items/{id}/edit(id=${item.id})}" class="button">編集</a>
+        <!-- 編集 -->
+        <div class="flex jc-end">
+            <a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a>
+            <!-- <br class="pcHide"> -->
+            <!-- 削除（POST） -->
+            <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post">
+                <button type="submit"  class="btn btn-danger" onclick="return confirm('作品を削除しますか？');">
+                <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </form>
+        </div>
 
-        <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline;">
-            <button type="submit" class="button danger" onclick="return confirm('作品を削除しますか？');">
-                削除
-            </button>
-        </form>
-        <br /><br />
+        <h2>この作品のバリエーション</h2>
 
-        <h2>バリエーション一覧</h2>
-
-        <a th:href="@{/items/{id}/variants/new(id=${item.id})}" class="button">
-            バリエーションを追加
+        <a th:href="@{/items/{id}/variants/new(id=${item.id})}" class="btn btn-primary btn-L">
+            新規バリエーションを追加
         </a>
-
+        
+        <!-- PC用テーブル -->
+		<div class="list-table">
         <table>
             <thead>
                 <tr>
@@ -100,9 +103,59 @@
                 </tr>
             </tbody>
         </table>
+        </div><!-- /PC用 -->
+        <!-- モバイル用カード -->
+				<div class="list-cards">
+                    <div th:if="${#lists.isEmpty(variants)}">
+                        <p colspan="10" style="text-align:center;">登録されているバリエーションがありません</p>
+                    </div>
+					
+                    <div class="list-cards"  th:each="v : ${variants}">
+
+							<div class="card-body">
+								<div class="card-top">
+                                    <p th:if="${v.imageFilename != null}"><img th:src="@{'/uploads/' + ${v.imageFilename}}"></p>
+                                    <!-- <p th:if="${v.imageFilename == null}">
+                                        画像なし
+                                    </p> -->
+                                    <p class="v_category"><span th:text="${v.category}"></span></p>
+
+                                    <ul>
+                                       <h3><span th:text="${v.color}"></span></h3> 
+                                       <div class="v_detail">
+                                            <li><span th:text="${v.size}"></span></li>
+											<li>入数：<span th:text="${v.quantityPerSet}"></span></li>
+                                       </div>
+                                        <li>販売価格：<span th:text="${v.price}"></span>円</li>
+										<li>在庫：<span th:text="${v.stock}"></span>個</li>
+                                        <!-- <li>SKUコード：<span th:text="${v.skuCode}"></span></li> -->   
+                                    </ul>
+
+                                    <!-- <p th:text="${v.color}"></p> -->
+                                    <!-- <p th:text="${v.size}"></p> -->
+                                    <!-- <p th:text="${v.category}"></p> -->
+                                    <!-- <p th:text="${v.quantityPerSet}"></p> -->
+                                    <!-- <p th:text="${v.stock}"></p> -->
+                                    <!-- <p th:text="${v.costPrice}"></p> -->
+                                    <!-- <p th:text="${v.price}"></p> -->
+                                    <!-- <p th:text="${v.skuCode}"></p> -->
+                                    <!-- <p>
+                                        <a th:href="@{/items/{itemId}/variants/{variantId}/edit(itemId=${item.id},variantId=${v.id})}"
+                                            class="button">編集</a>
+                                    </p> -->
+								</div>
+							</div>
+                            <div class="card-actions">
+                            <a th:href="@{/items/{itemId}/variants/{variantId}/edit(itemId=${item.id},variantId=${v.id})}" 
+                                class="btn btn-secondary"><i class="fa-regular fa-pen-to-square"></i></a>
+                            </div>     
+					</div>
+				</div><!-- モバイル用 -->
+
+
 
         <br>
-        <a href="/items" class="button">作品一覧に戻る</a>
+        <a href="/items" class="link-text">作品一覧に戻る</a>
 
         <!-- footer 呼び出し -->
         <div th:replace="~{layout/footer :: footer}"></div>

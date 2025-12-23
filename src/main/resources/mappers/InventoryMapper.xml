@@ -16,7 +16,9 @@
         v.price,
         CONCAT('/uploads/', v.image_filename) AS imagePath       
     FROM items i
-    INNER JOIN item_variants v ON i.id = v.item_id
+    INNER JOIN item_variants v 
+    ON i.id = v.item_id
+    AND v.is_deleted = 0
     WHERE 1 = 1
         <if test="keyword != null and keyword != ''">
             AND i.name LIKE CONCAT('%', #{keyword}, '%')
@@ -45,12 +47,18 @@
 	
 	<!-- 色一覧 -->
 	<select id="findDistinctColors" resultType="string">
-	    SELECT DISTINCT color FROM item_variants ORDER BY color
+	    SELECT DISTINCT color 
+        FROM item_variants 
+        WHERE is_deleted = 0
+        ORDER BY color
 	</select>
 	
 	<!-- サイズ一覧 -->
 	<select id="findDistinctSizes" resultType="string">
-	    SELECT DISTINCT size FROM item_variants ORDER BY size
+	    SELECT DISTINCT size 
+        FROM item_variants 
+        WHERE is_deleted = 0
+        ORDER BY size
 	</select>
 
 </mapper>

@@ -6,28 +6,40 @@
     'ハンドメイド作品の販売履歴の一覧を確認できます'
 )}"></head>
 
-<body>
+<body id="sale">
 
 	<!-- header 呼び出し -->
 	<div th:replace="~{layout/header :: header('sales')}"></div>
 
 	<main class="container">
-		<h2>販売一覧</h2>
+		<h2>販売記録一覧</h2>
 		<!-- ここに画面固有の中身 -->
 
-		<a href="/sales/new" class="button">販売を登録する</a>
+		<a href="/sales/new" class="btn btn-primary btn-L">販売記録を登録する</a>
 		<br /><br />
 
 		<table>
 			<thead>
-				<tr>
-					<th>販売日</th>
-					<th>作品/バリエーション</th>
-					<th>数量</th>
-					<th>販売価格</th>
-					<th>販売チャネル</th>
-					<th>メモ</th>
+				<tr class="spHide">
+					<!-- <th id="sale-id">ID</th> -->
+					<th id="sale-date">販売日</th>
+					<th id="sale-category">カテゴリ</th>
+					<th id="sale-item">作品 - バリエーション（サイズ）</th>
+					<th id="sale-quantity">数量</th>
+					<th id="sale-price">売価</th>
+					<th id="sale-channel">チャネル</th>
+					<th id="sale-memo" class="spHide">メモ</th>
 				</tr>
+				<!-- <tr class="pcHide">
+					<th id="sale-id">ID</th>
+					<th id="sale-date">販売日</th>
+					<th id="sale-category">カテゴリ</th>
+					<th id="sale-item">作品 - バリエーション（サイズ）</th>
+					<th id="sale-quantity">数量</th>
+					<th id="sale-price">売価</th>
+					<th id="sale-channel">チャネル</th>
+					<th id="sale-memo" class="spHide">メモ</th>
+				</tr> -->
 			</thead>
 			<tbody>
 				<tr th:if="${#lists.isEmpty(sales)}">
@@ -35,20 +47,43 @@
 						販売履歴はありません
 					</td>
 				</tr>
-				<tr th:each="s : ${sales}">
-					<td th:text="${#temporals.format(s.saleDate, 'yyyy-MM-dd')}"></td>
-					<td th:text="${s.itemName + '/' + s.color + '(' + s.size + ')'}"></td>
-					<!--<td th:text="${s.variantId}"></td>-->
-					<td th:text="${s.quantity}"></td>
-					<td th:text="${s.salePrice}"></td>
-					<td th:text="${s.channel}"></td>
-					<td th:text="${s.memo}"></td>
-				</tr>
+				<div th:each="s : ${sales}">
+					<tr class="spHide">
+						<!-- <td th:text="${s.variantId}"></td> -->
+						<td th:text="${#temporals.format(s.saleDate, 'yyyy-MM-dd')}" class="bg-light-blue bold"></td>
+						<td th:text="${s.itemCategory}"></td>
+						<td th:text="${s.itemName + ' - ' + s.color + '(' + s.size + ')'}"></td>
+						<td th:text="${s.quantity}" class="bg-light-blue"></td>
+						<td th:text="${s.salePrice}"></td>
+						<td th:text="${s.channel}"></td>
+						<td th:text="${s.memo}"></td>
+					</tr>
+					
+					<div class="sp-list">
+						<tr class="pcHide">
+							<!-- <td th:text="${s.variantId}"></td> -->
+							<td th:text="${#temporals.format(s.saleDate, 'yyyy-MM-dd')}" class="bg-light-blue bold"></td>
+							<td class="bg-light-blue"><span th:text="${s.quantity}"></span>個</td>
+							<td>売価：<span th:text="${s.salePrice}"></span> 円</td>
+						</tr>
+						<tr class="pcHide">
+							<td th:text="${s.itemCategory}"></td>
+							<td th:text="${s.itemName + ' - ' + s.color + '(' + s.size + ')'}" colspan="2"></td>
+						</tr>	
+						<tr class="pcHide">
+							<td th:text="${s.channel}" colspan="3"></td>
+						</tr>	
+						<tr class="pcHide">
+							<td th:text="${s.memo}" colspan="3"></td>
+						</tr>
+					</div>
+
+				</div>
 			</tbody>
 		</table>
 		<br />
 
-		<a href="/items" class="button">作品一覧へ戻る</a>
+		<a href="/items" class="link-text">作品一覧へ戻る</a>
 		<!-- footer 呼び出し -->
 		<div th:replace="~{layout/footer :: footer}"></div>
 

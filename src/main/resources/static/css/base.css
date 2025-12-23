@@ -13,6 +13,13 @@
   .pcHide{display: none;}
 }
 
+.flex{
+  display: flex;
+}
+.jc-end{
+  justify-content: end;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -23,6 +30,11 @@ body {
 .bold {font-weight: bold;}
 
 .taC{text-align: center;}
+.tal{text-align: left;}
+.tar{text-align: right;}
+
 .m8{margin: 8px;}
 .mb16{margin-bottom: 16px;}
 .mb32{margin-bottom: 32px;}
+
+.bg-light-blue{background-color: aliceblue;}

@@ -91,6 +91,10 @@ public class ItemVariantController {
 			Model model
 			) {
 		ItemVariant variant = variantService.findById(variantId);
+
+		if (variant == null){
+			return "redirect:/items/" + itemId ;
+		}
 		
 		model.addAttribute("variant",variant);
 		model.addAttribute("item",itemService.findById(itemId));

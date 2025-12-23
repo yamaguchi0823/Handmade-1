@@ -17,6 +17,7 @@ public class SaleView {
 	
 	// JOIN 対応
 	private String itemName;
+	private String itemCategory;
 	private String color;
 	private String size;
 	

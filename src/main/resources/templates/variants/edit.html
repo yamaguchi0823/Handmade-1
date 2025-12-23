@@ -39,12 +39,13 @@
 		<!-- 画像削除ボタン -->
 		<div>
 			<!-- すでに画像がある場合だけ表示 -->
-			<div th:if="${variant.imageFilename != null}">
+
+			<div th:if="${variant != null and variant.imageFilename != null}"></div>	
 				<p>現在の画像：</p>
 				<img th:src="@{'/uploads/' + ${variant.imageFilename}}" width="200">
 			</div>
 
-			<form th:if="${variant.imageFilename != null}"
+			<form th:if="${variant != null and variant.imageFilename != null}"
 				th:action="@{/items/{itemId}/variants/{variantId}/delete-image(itemId=${item.id}, variantId=${variant.id})}"
 				method="post">
 				<button type="submit">画像を削除する</button>
