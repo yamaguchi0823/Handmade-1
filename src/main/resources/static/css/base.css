@@ -4,6 +4,14 @@
 * {
   box-sizing: border-box;
 }
+/* PCだけ */
+@media screen and (max-width: 768px) {
+  .spHide{display: none;}
+}
+
+@media screen and (min-width: 768px) {
+  .pcHide{display: none;}
+}
 
 body {
   margin: 0;
@@ -14,12 +22,7 @@ body {
 
 .bold {font-weight: bold;}
 
-
-/* PCだけ */
-@media screen and (max-width: 768px) {
-  .spHide{display: none;}
-}
-
-@media screen and (min-width: 768px) {
-  .pcHide{display: none;}
-}
+.taC{text-align: center;}
+.m8{margin: 8px;}
+.mb16{margin-bottom: 16px;}
+.mb32{margin-bottom: 32px;}

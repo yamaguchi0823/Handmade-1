@@ -16,7 +16,10 @@
         <!-- ここに画面固有の中身 -->
 
         <!-- 新規登録ボタン -->
-        <a th:href="@{/items/new}" class="btn-primary-L">作品分類を登録する</a>
+        <div class="mb32">
+            <a th:href="@{/items/new}" class="btn btn-primary btn-L">
+                <i class="fa-solid fa-circle-plus"></i> 作品分類を新規登録</a>
+        </div>
 
         <!-- PC用テーブル -->
         <div class="list-table">
@@ -81,7 +84,7 @@
         </div><!-- /list-table -->
 
         <br />
-        <a th:href="@{/sales}" class="button">販売一覧を見る</a>
+        <a th:href="@{/sales}" class="link-text">販売一覧を見る</a>
         <!-- footer 呼び出し -->
         <div th:replace="~{layout/footer :: footer}"></div>
 

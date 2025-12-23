@@ -14,7 +14,7 @@
 		<!-- ここに画面固有の中身 -->
 
 		<!-- 検索フォーム -->
-		<form method="get" action="/inventory" class="search-form">
+		<form method="get" action="/inventory" class="input-form">
 
 			<div class="inputs">
 				<input type="text" name="keyword" placeholder="作品名" th:value="${keyword}" />
@@ -46,7 +46,7 @@
 				</div>
 			</div><!-- /selects -->
 
-			<button type="submit" class="btn-primary-L">検索</button>
+			<button type="submit" class="btn btn-primary btn-L">検索</button>
 		</form>
 
 		<!-- 作品ごとのテーブル表示 -->

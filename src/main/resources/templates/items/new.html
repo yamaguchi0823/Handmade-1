@@ -12,10 +12,10 @@
 	<div th:replace="~{layout/header :: header('itemsNew')}"></div>
 
 	<main class="container">
-		<h2>作品登録</h2>
+		<h2>作品の分類登録</h2>
 		<!-- ここに画面固有の中身 -->
 
-		<form th:action="@{/items}" method="post">
+		<form th:action="@{/items}" method="post" class="input-form">
 
 			<label>作品名：</label>
 			<input type="text" name="name" required />
@@ -28,9 +28,11 @@
 			<label>説明：</label>
 			<textarea name="description" cols="40" rows="4"></textarea>
 			<br /><br />
-
-			<button type="submit" class="button">登録する</button>
-			<a href="/items" class="button">戻る</a>
+			<div class="btn-M2set">
+				<a href="/items"  class="btn btn-secondary btn-M">キャンセル</a>
+				<button type="submit" class="btn btn-primary btn-M">登録する</button>
+			</div>
+			<a th:href="@{/items}" class="link-text">作品の分類リストに戻る</a>
 		</form>
 
 		<!-- footer 呼び出し -->
