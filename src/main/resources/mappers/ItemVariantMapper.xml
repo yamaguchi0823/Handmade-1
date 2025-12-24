@@ -21,6 +21,7 @@
             created_at AS createdAt,
             updated_at AS updatedAt
         FROM item_variants
+				WHERE is_deleted = 0
         ORDER BY id ASC
     </select>
     

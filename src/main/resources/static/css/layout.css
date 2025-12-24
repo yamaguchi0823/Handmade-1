@@ -2,7 +2,7 @@
    Layout
 ========================= */
 .container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 16px;
 }
@@ -12,7 +12,7 @@ main {
 }
 
 /* =========================
-   Header / Footer
+   Header
 ========================= */
 
 /* ===== もともとの　header ===== */
@@ -43,6 +43,12 @@ main {
 	/* background: none; */
 	border: none;
 	cursor: pointer;
+}
+
+/* ナビ */
+#nav-menu a i{
+	color: #1BD896;
+	margin-right: 8px;
 }
 
 /* ===== overlay ===== */
@@ -203,8 +209,6 @@ body.menu-open {
 
 /* ===== /もともとの　header ===== */
 
-
-
 .header {
   background: #ffffff;
   border-bottom: 1px solid #ddd;
@@ -223,4 +227,14 @@ body.menu-open {
 .header-nav a.active {
   font-weight: bold;
   color: #2c7be5;
+}
+
+/* =========================
+   Footer
+========================= */
+footer{
+	max-width: 1200px;
+	padding: 16px;
+	margin: auto;
+	text-align: center;
 }

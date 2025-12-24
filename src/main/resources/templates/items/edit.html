@@ -12,10 +12,10 @@
 	<div th:replace="~{layout/header :: header('itemsEdit')}"></div>
 
 	<main class="container">
-		<h2>作品編集</h2>
+		<h2>作品の分類編集</h2>
 		<!-- ここに画面固有の中身 -->
 
-		<form th:action="@{/items/{id}/edit(id=${item.id})}" method="post">
+		<form th:action="@{/items/{id}/edit(id=${item.id})}" method="post" class="input-form">
 
 			<label>作品名：</label>
 			<input type="text" name="name" th:value="${item.name}" required />
@@ -25,12 +25,14 @@
 			<input type="text" name="category" th:value="${item.category}" />
 			<br /><br />
 
-			<label>説明：</label>
+			<label>メモ：</label>
 			<textarea name="description" cols="40" rows="4" th:text="${item.description}"></textarea>
-			<br /><br />
-
-			<button type="submit" class="button">更新する</button>
-			<a th:href="@{/items/{id}(id=${item.id})}" class="button">戻る</a>
+			<br />
+			<div class="btn-M2set">
+				<a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-secondary btn-M">キャンセル</a>
+				<button type="submit" class="btn btn-primary btn-M">更新する</button>
+			</div>
+			<a th:href="@{/items}" class="link-text">作品の分類リストに戻る</a>
 		</form>
 		<!-- footer 呼び出し -->
 		<div th:replace="~{layout/footer :: footer}"></div>

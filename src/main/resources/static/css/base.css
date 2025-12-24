@@ -4,6 +4,19 @@
 * {
   box-sizing: border-box;
 }
+/* PCだけ */
+@media screen and (max-width: 768px) {
+  .spHide{display: none;}
+}
+
+@media screen and (min-width: 768px) {
+  .pcHide{display: none;}
+}
+
+.flex{display: flex;}
+.jc-end{
+  justify-content: end;
+}
 
 body {
   margin: 0;
@@ -11,3 +24,23 @@ body {
   background-color: #f5f6f8;
   color: #333;
 }
+.txt-primary{color: #1BD896;}
+
+.bold {font-weight: bold;}
+.weight-normal{font-weight: normal !important;}
+
+
+.taC{text-align: center;}
+.tal{text-align: left;}
+.tar{text-align: right;}
+
+.m8{margin: 8px;}
+.mb16{margin-bottom: 16px;}
+.mb32{margin-bottom: 32px;}
+
+.bg-light-blue{background-color: aliceblue;}
+
+.w30{width: 30%;}
+.w40{width: 40%;}
+.w50{width: 50%;}
+

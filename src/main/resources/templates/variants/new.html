@@ -30,10 +30,10 @@
 <br>
 
 <form th:action="@{/items/{itemId}/variants(itemId=${item.id})}" 
-	method="post" enctype="multipart/form-data">
+	method="post" enctype="multipart/form-data" class="input-form">
 	
 	<label>画像アップロード</label>
-	<input type="file" name="imageFile" />
+	<input type="file" name="imageFile" class="input-btn" />
 	<br /><br />
 
     <label>色：</label>
