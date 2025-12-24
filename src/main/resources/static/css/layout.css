@@ -45,6 +45,12 @@ main {
 	cursor: pointer;
 }
 
+/* ナビ */
+#nav-menu a i{
+	color: #1BD896;
+	margin-right: 8px;
+}
+
 /* ===== overlay ===== */
 .menu-overlay {
 	position: fixed;

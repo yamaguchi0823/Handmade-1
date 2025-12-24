@@ -15,19 +15,19 @@
 		<nav class="nav" id="nav-menu">
 
 			<a th:href="@{/}" th:classappend="${currentPath == 'home'} ? 'active' : ''">
-				Home
+				<i class="fa-solid fa-house"></i>Home
 			</a>
 			
 			<a th:href="@{/inventory}" th:classappend="${currentPath == 'inventory'} ? 'active' : ''">
-				在庫一覧
+				<i class="fa-solid fa-cubes-stacked"></i>在庫一覧
 			</a>
 
 			<a th:href="@{/items}" th:classappend="${currentPath == 'items'} ? 'active' : ''">
-				作品管理
+				<i class="fa-regular fa-gem"></i>作品管理
 			</a>
 
 			<a th:href="@{/sales}" th:classappend="${currentPath == 'sales'} ? 'active' : ''">
-				販売管理
+				<i class="fa-solid fa-circle-check"></i>販売管理
 			</a>
 
 		</nav>

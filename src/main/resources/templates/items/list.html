@@ -30,8 +30,8 @@
                         <!-- <th id="item-img">>画像</th> -->
                         <th id="item-id" class="spHide">id</th>
                         <th id="item-name">作品</th>
-                        <th id="item-category" class="spHide">作品カテゴリ</th> 
-                        <th id="item-discription" class="spHide">メモ</th> 
+                        <th id="item-category" class="spHide">作品カテゴリ</th>
+                        <th id="item-discription" class="spHide">メモ</th>
                         <th id="item-created" class="spHide">登録日</th>
                         <th id="item-action">操作</th>
                     </tr>
@@ -39,50 +39,45 @@
 
                 <tbody>
                     <!-- items が空の場合 -->
-                     <th:block th:if="${items == null or #lists.isEmpty(items)}">
-                         <tr>
-                             <td colspan="6" style="text-align:center;">登録された作品がありません</td>
-                         </tr>
-                     </th:block>
+                    <th:block th:if="${items == null or #lists.isEmpty(items)}">
+                        <tr>
+                            <td colspan="6" style="text-align:center;">登録された作品がありません</td>
+                        </tr>
+                    </th:block>
 
                     <!-- items が存在する場合 -->
-                     <th:block th:unless="${items == null or #lists.isEmpty(items)}">
+                    <th:block th:unless="${items == null or #lists.isEmpty(items)}">
+                        <th:block th:each="item : ${items}">
+                            <tr>
+                                <!-- <td><img th:src="@{/images/noimage.png'}"></td> -->
+                                <td th:text="${item.id}"></td>
+                                <td><a th:href="@{/items/{id}(id=${item.id})}"><span th:text="${item.name}"></span></a></td>
+                                <td th:text="${item.category}"></td>
+                                <td th:text="${item.description}" class="spHide"></td>
+                                <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}" class="spHide"></td>
+                                <td>
 
-                         <tr th:each="item : ${items}">
-                             <!-- <td><img th:src="@{/images/noimage.png'}"></td> -->
-                             <td th:text="${item.id}" class="spHide"></td>
-                             <td>
-                                 <span th:text="${item.id}"></span>
-                                 <br class="pcHide">
-                                 <span th:text="${item.name}"></span>
-                                 <br class="pcHide">
-                                 <span th:text="${item.category}" class="pcHide"></span>
-                             </td>
-                             
-                             <td th:text="${item.category}" class="spHide"></td>
-                             <td th:text="${item.description}" class="spHide"></td>
-                             <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}" class="spHide"></td>
-                             <td>
-     
-                                 <!-- 詳細 -->
-                                 <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-secondary">
-                                     <i class="fa-solid fa-angles-right"></i>
-                                 </a>
-                                 <br class="pcHide">
-                                 <!-- 編集 -->
-                                 <a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-secondary"><i
-                                     class="fa-regular fa-pen-to-square"></i></a>
-                                 <br class="pcHide">
-                                 <!-- 削除（POST） -->
-                                 <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post"
-                                     style="display:inline;">
-                                     <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？');">
-                                         <i class="fa-solid fa-trash-can"></i>
-                                     </button>
-                                 </form>
-                             </td>
-                         </tr>
-                     </th:block>
+                                    <!-- 詳細 -->
+                                    <!-- <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-secondary">
+                                        <i class="fa-solid fa-angles-right"></i>
+                                    </a> -->
+                                    <br class="pcHide">
+                                    <!-- 編集 -->
+                                    <a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-secondary"><i
+                                            class="fa-regular fa-pen-to-square"></i></a>
+                                    <br class="pcHide">
+                                    <!-- 削除（POST） -->
+                                    <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post"
+                                        style="display:inline;">
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('本当に削除しますか？');">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </th:block>
 
                 </tbody>
             </table>
