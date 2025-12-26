@@ -8,87 +8,86 @@
 
 <body id="items">
 
-    <!-- header 呼び出し -->
-    <div th:replace="~{layout/header :: header('items')}"></div>
+	<!-- header 呼び出し -->
+	<div th:replace="~{layout/header :: header('items')}"></div>
 
-    <main class="container">
-        <h2>作品の分類リスト</h2>
-        <!-- ここに画面固有の中身 -->
+	<main class="container">
+		<h2>作品の分類リスト</h2>
+		<!-- ここに画面固有の中身 -->
 
-        <!-- 新規登録ボタン -->
-        <div class="mb32">
-            <a th:href="@{/items/new}" class="btn btn-primary btn-L">
-                <i class="fa-solid fa-circle-plus"></i> 作品分類を新規登録</a>
-        </div>
+		<!-- 新規登録ボタン -->
+		<div class="mb32">
+			<a th:href="@{/items/new}" class="btn btn-primary btn-L">
+				<i class="fa-solid fa-circle-plus"></i> 作品分類を新規登録</a>
+		</div>
 
-        <!-- PC用テーブル -->
-        <div>
-            <!-- 作品一覧テーブル -->
-            <table>
-                <thead>
-                    <tr>
-                        <!-- <th id="item-img">>画像</th> -->
-                        <th id="item-id" class="spHide">id</th>
-                        <th id="item-name">作品</th>
-                        <th id="item-category" class="spHide">作品カテゴリ</th>
-                        <th id="item-discription" class="spHide">メモ</th>
-                        <th id="item-created" class="spHide">登録日</th>
-                        <th id="item-action">操作</th>
-                    </tr>
-                </thead>
+		<!-- PC用テーブル -->
+		<div>
+			<!-- 作品一覧テーブル -->
+			<table>
+				<thead>
+					<tr>
+						<!-- <th id="item-img">>画像</th> -->
+						<!-- <th id="item-id" class="spHide">id</th> -->
+						<th id="item-name">作品</th>
+						<th id="item-category">作品カテゴリ</th>
+						<th id="item-discription" class="spHide">メモ</th>
+						<th id="item-created" class="spHide">登録日</th>
+						<th id="item-action">操作</th>
+					</tr>
+				</thead>
 
-                <tbody>
-                    <!-- items が空の場合 -->
-                    <th:block th:if="${items == null or #lists.isEmpty(items)}">
-                        <tr>
-                            <td colspan="6" style="text-align:center;">登録された作品がありません</td>
-                        </tr>
-                    </th:block>
+				<tbody>
+					<!-- items が空の場合 -->
+					<th:block th:if="${items == null or #lists.isEmpty(items)}">
+						<tr>
+							<td colspan="6" style="text-align:center;">登録された作品がありません</td>
+						</tr>
+					</th:block>
 
-                    <!-- items が存在する場合 -->
-                    <th:block th:unless="${items == null or #lists.isEmpty(items)}">
-                        <th:block th:each="item : ${items}">
-                            <tr>
-                                <!-- <td><img th:src="@{/images/noimage.png'}"></td> -->
-                                <td th:text="${item.id}"></td>
-                                <td><a th:href="@{/items/{id}(id=${item.id})}"><span th:text="${item.name}"></span></a></td>
-                                <td th:text="${item.category}"></td>
-                                <td th:text="${item.description}" class="spHide"></td>
-                                <td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}" class="spHide"></td>
-                                <td>
+					<!-- items が存在する場合 -->
+					<th:block th:unless="${items == null or #lists.isEmpty(items)}">
+						<th:block th:each="item : ${items}">
+							<tr>
+								<!-- <td><img th:src="@{/images/noimage.png'}"></td> -->
+								<!-- <td th:text="${item.id}"></td> -->
+								<td><a th:href="@{/items/{id}(id=${item.id})}"><span th:text="${item.name}"></span></a>
+								</td>
+								<td th:text="${item.category}"></td>
+								<td th:text="${item.description}" class="spHide"></td>
+								<td th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}" class="spHide"></td>
+								<td>
 
-                                    <!-- 詳細 -->
-                                    <!-- <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-secondary">
+									<!-- 詳細 -->
+									<!-- <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-secondary">
                                         <i class="fa-solid fa-angles-right"></i>
                                     </a> -->
-                                    <br class="pcHide">
-                                    <!-- 編集 -->
-                                    <a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-secondary"><i
-                                            class="fa-regular fa-pen-to-square"></i></a>
-                                    <br class="pcHide">
-                                    <!-- 削除（POST） -->
-                                    <form th:action="@{/items/{id}/delete(id=${item.id})}" method="post"
-                                        style="display:inline;">
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('本当に削除しますか？');">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </th:block>
-                    </th:block>
+									<br class="pcHide">
+									<!-- 編集 -->
+									<a th:href="@{/items/{id}/edit(id=${item.id})}" class="btn btn-secondary"><i
+											class="fa-regular fa-pen-to-square"></i></a>
+									<br class="pcHide">
+									<!-- 削除（POST） -->
+									<form th:action="@{/items/{id}/delete(id=${item.id})}" method="post" style="display:inline;">
+										<button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？');">
+											<i class="fa-solid fa-trash-can"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</th:block>
+					</th:block>
 
-                </tbody>
-            </table>
-        </div><!-- /list-table -->
+				</tbody>
+			</table>
+		</div><!-- /list-table -->
 
-        <br />
-        <a th:href="@{/sales}" class="link-text">販売一覧を見る</a>
-        <!-- footer 呼び出し -->
-        <div th:replace="~{layout/footer :: footer}"></div>
+		<br />
+		<a th:href="@{/sales}" class="link-text">販売一覧を見る</a>
+		<!-- footer 呼び出し -->
+		<div th:replace="~{layout/footer :: footer}"></div>
 
-        <script th:src="@{/js/common.js}"></script>
+		<script th:src="@{/js/common.js}"></script>
 </body>
 
 </html>

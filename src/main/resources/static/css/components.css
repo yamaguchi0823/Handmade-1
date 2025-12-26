@@ -189,6 +189,13 @@ th, td {
   white-space: nowrap;
   /* font-size: 0.8rem; */
 }
+@media screen and (max-width: 768px){
+  th, td {
+    white-space: normal;
+    word-break: break-all;
+  }
+}
+
 
 th {
   background: #f0f2f5;
